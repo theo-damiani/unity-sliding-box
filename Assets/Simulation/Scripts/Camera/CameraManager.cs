@@ -23,27 +23,23 @@ public class CameraManager : MonoBehaviour
 
     public void InitCamera(Vector3 initPos, bool isLocked, float minDistanceToObject, Slider uiSlider)
     {
+        // min/max value config at the top, because it will change slider.value and so call the function ZoomInOutTarget!
+        uiSlider.minValue = 1;
+        uiSlider.maxValue = GetSliderMax();
+
+        // Set initial camera pos
         gameObject.transform.localPosition = target.localPosition + initPos;
         previousTargetPos = target.localPosition;
         isLockedOnTarget = isLocked;
-        // Cache the initial offset at time of load/spawn:
+        // Check if initial pos is in bounds
         initOffsetToTarget = initPos;
         float initOffsetClamped = Mathf.Clamp(initOffsetToTarget.magnitude, minDistanceToObject, GetSliderMax());
         initOffsetToTarget = initOffsetToTarget.normalized*initOffsetClamped;
+
         distanceToTarget = initOffsetToTarget;
         minDistanceToTarget = (initPos - target.localPosition).normalized * minDistanceToObject;
-        if (isLockedOnTarget)
-        {
-            uiSlider.SetValueWithoutNotify(CameraToSlider(initOffsetToTarget.magnitude));
-        }
-        else
-        {
-            float distanceToObject = (initPos - target.localPosition).magnitude;
-            float zoomScale = Mathf.Clamp(distanceToObject, minDistanceToObject, GetSliderMax());
-            uiSlider.SetValueWithoutNotify(CameraToSlider(zoomScale));
-        }
-
-        
+        uiSlider.SetValueWithoutNotify(CameraToSlider(initOffsetToTarget.magnitude));
+    
         zoomSlider = uiSlider;
     }
 
@@ -53,13 +49,7 @@ public class CameraManager : MonoBehaviour
         {
             gameObject.transform.localPosition = target.localPosition + distanceToTarget;
             previousTargetPos = target.localPosition;
-            // currentCamPos = gameObject.transform.localPosition;
         }
-        // else 
-        // {
-        //     gameObject.transform.localPosition = currentCamPos + zoomDirScaled;
-        // }
-        // currentCamPos = gameObject.transform.localPosition;
     }
 
     public void ZoomInOutTarget(float value)
@@ -82,12 +72,10 @@ public class CameraManager : MonoBehaviour
         {
             // from Locked to UnLocked
             gameObject.transform.localPosition = target.localPosition + zoomDirScaled;
-            //zoomSlider.SetValueWithoutNotify(CameraToSlider(zoomSlider.value + distanceToTarget.magnitude));
         }
         else
         {
             distanceToTarget = zoomDirScaled;
-            // zoomSlider.SetValueWithoutNotify(CameraToSlider(zoomSlider.value - distanceToTarget.magnitude));
         }
     }
 
@@ -97,11 +85,11 @@ public class CameraManager : MonoBehaviour
         if (!isLockedOnTarget)
         {
             // from Locked to UnLocked
-            zoomSlider.SetValueWithoutNotify(CameraToSlider(zoomSlider.value + distanceToTarget.magnitude));
+            gameObject.transform.localPosition = target.localPosition + zoomDirScaled;
         }
         else
         {
-            zoomSlider.SetValueWithoutNotify(CameraToSlider(zoomSlider.value - distanceToTarget.magnitude));
+            distanceToTarget = zoomDirScaled;
         }
     }
     

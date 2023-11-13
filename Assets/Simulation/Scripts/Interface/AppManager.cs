@@ -60,7 +60,6 @@ public class AppManager : Singleton<AppManager>
         cameraLockingToggle.SetWithoutRaising(currentAffordances.camera.isLockedOnObject);
 
         Slider zoomSlider = cameraZoomSlider.GetComponent<Slider>();
-        CameraManager cameraManager = mainCamera.GetComponent<CameraManager>();
         float minDistanceToObject = (mainObject.localScale.x + mainObject.localScale.y + mainObject.localScale.z)/3;
         // Init camera
         mainCamera.InitCamera(
@@ -69,12 +68,6 @@ public class AppManager : Singleton<AppManager>
             minDistanceToObject,
             zoomSlider
         );
-        // Init zoom slider
-        float distanceToObject = (cameraPos - cameraManager.target.localPosition).magnitude;
-        // float zoomScale = Mathf.Clamp(distanceToObject, minDistanceToObject, cameraManager.GetSliderMax());
-        zoomSlider.minValue = 1;
-        zoomSlider.maxValue = cameraManager.GetSliderMax();
-        // zoomSlider.SetValueWithoutNotify(cameraManager.CameraToSlider(zoomScale));
 
         cameraControls.gameObject.SetActive(currentAffordances.camera.showCameraControl);
 
