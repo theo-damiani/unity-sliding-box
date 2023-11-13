@@ -22,7 +22,7 @@ MonoBehaviour:
       Y: 4
       Z: -10
     showCameraControl: 1
-    isLockedOnObject: 0
+    isLockedOnObject: 1
   showReferenceFrame: 0
   physicalObject:
     isInteractiveUp: 0
@@ -39,12 +39,12 @@ MonoBehaviour:
       X: 0
       Y: 0
       Z: 0
-    showVelocityVector: 0
+    showVelocityVector: 1
     initialVelocity:
-      X: 0
+      X: 2
       Y: 0
       Z: 0
-    velocityVectorIsInteractive: 0
+    velocityVectorIsInteractive: 1
     showVelocityLabel: 0
     showVelocityEquation: 0
   thrustForce:

@@ -27,6 +27,9 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private Transform mainObject;
     [SerializeField] private RectTransform showPathToggle;
     [SerializeField] private BoolVariable showPath;
+    [SerializeField] private Vector3Variable boxVelocity;
+    [SerializeField] private DraggableVector boxVelocityVector;
+
     public override void Awake()
     {
         base.Awake();
@@ -70,6 +73,15 @@ public class AppManager : Singleton<AppManager>
         );
 
         cameraControls.gameObject.SetActive(currentAffordances.camera.showCameraControl);
+
+        // ============= Box =============
+        boxVelocity.Value = currentAffordances.physicalObject.initialVelocity.ToVector3();
+        boxVelocityVector.gameObject.SetActive(currentAffordances.physicalObject.showVelocityVector);
+        boxVelocityVector.SetInteractable(currentAffordances.physicalObject.velocityVectorIsInteractive);
+        boxVelocityVector.Redraw();
+
+        mainObject.GetComponent<Rigidbody>().isKinematic = false;
+        mainObject.GetComponent<Rigidbody>().velocity = boxVelocity.Value;
 
         // ============= Path Renderer =============
         showPath.Value = currentAffordances.physicalObject.showTrace;

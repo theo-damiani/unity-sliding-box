@@ -16,11 +16,6 @@ public class CameraManager : MonoBehaviour
     private Vector3 zoomDirScaled = Vector3.zero;
     private Vector3 previousTargetPos;
 
-    void Start()
-    {
-        
-    }
-
     public void InitCamera(Vector3 initPos, bool isLocked, float minDistanceToObject, Slider uiSlider)
     {
         // min/max value config at the top, because it will change slider.value and so call the function ZoomInOutTarget!
