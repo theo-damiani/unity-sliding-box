@@ -5,33 +5,46 @@ using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    public float minZ;
-    public float maxZ;
-    [SerializeField] private Slider zoomSlider;
+    public Transform target;
+    public float minCameraDist;
+    public float maxCameraDist;
     [HideInInspector] public bool isLockedOnTarget = true;
-    private Vector3 initCameraPos;
+    [HideInInspector] public Slider zoomSlider;
     private Vector3 initOffsetToTarget;
     private Vector3 distanceToTarget;
+    private Vector3 minDistanceToTarget;
+    private Vector3 zoomDirScaled = Vector3.zero;
+    private Vector3 previousTargetPos;
 
     void Start()
     {
         
     }
 
-    public void InitCamera(Vector3 initPos, bool isLocked)
+    public void InitCamera(Vector3 initPos, bool isLocked, float minDistanceToObject, Slider uiSlider)
     {
-        // Cache the initial offset at time of load/spawn:
-        initCameraPos = initPos;
-        gameObject.transform.localPosition = initPos;
+        gameObject.transform.localPosition = target.localPosition + initPos;
+        previousTargetPos = target.localPosition;
         isLockedOnTarget = isLocked;
-        SetOffsetToTarget();
-    }
+        // Cache the initial offset at time of load/spawn:
+        initOffsetToTarget = initPos;
+        float initOffsetClamped = Mathf.Clamp(initOffsetToTarget.magnitude, minDistanceToObject, GetSliderMax());
+        initOffsetToTarget = initOffsetToTarget.normalized*initOffsetClamped;
+        distanceToTarget = initOffsetToTarget;
+        minDistanceToTarget = (initPos - target.localPosition).normalized * minDistanceToObject;
+        if (isLockedOnTarget)
+        {
+            uiSlider.SetValueWithoutNotify(CameraToSlider(initOffsetToTarget.magnitude));
+        }
+        else
+        {
+            float distanceToObject = (initPos - target.localPosition).magnitude;
+            float zoomScale = Mathf.Clamp(distanceToObject, minDistanceToObject, GetSliderMax());
+            uiSlider.SetValueWithoutNotify(CameraToSlider(zoomScale));
+        }
 
-    public void SetOffsetToTarget()
-    {
-        initOffsetToTarget = gameObject.transform.localPosition - target.localPosition;
-        distanceToTarget = gameObject.transform.localPosition - target.localPosition;
+        
+        zoomSlider = uiSlider;
     }
 
     void LateUpdate()
@@ -39,82 +52,84 @@ public class CameraManager : MonoBehaviour
         if (isLockedOnTarget)
         {
             gameObject.transform.localPosition = target.localPosition + distanceToTarget;
+            previousTargetPos = target.localPosition;
+            // currentCamPos = gameObject.transform.localPosition;
         }
+        // else 
+        // {
+        //     gameObject.transform.localPosition = currentCamPos + zoomDirScaled;
+        // }
+        // currentCamPos = gameObject.transform.localPosition;
     }
 
-    public void ZoomAlongZ(float value)
+    public void ZoomInOutTarget(float value)
     {
-        if (isLockedOnTarget) 
+        zoomDirScaled = minDistanceToTarget * SliderToCamera(value);
+        if (isLockedOnTarget)
         {
-            distanceToTarget = new Vector3(distanceToTarget.x, distanceToTarget.y, SliderToCameraZ(value));
+            distanceToTarget = zoomDirScaled;
         }
         else
         {
-            Vector3 currentCamPos = gameObject.transform.localPosition;
-            gameObject.transform.localPosition = new Vector3(currentCamPos.x, currentCamPos.y, SliderToCameraZ(value));
-        }
-    }
-
-    public void ZoomInAlongZ()
-    {
-        if (distanceToTarget.z+1 <= minZ)
-        {
-            distanceToTarget += Vector3.forward;
-        }
-    }
-
-    public void ZoomOutAlongZ()
-    {
-        if (distanceToTarget.z-1 >= maxZ)
-        {
-            distanceToTarget -= Vector3.forward;
+            gameObject.transform.localPosition = previousTargetPos + zoomDirScaled;
         }
     }
 
     public void ToggleCameraLocked()
     {
         isLockedOnTarget = !isLockedOnTarget;
-        if (isLockedOnTarget)
+        if (!isLockedOnTarget)
         {
-            zoomSlider.SetValueWithoutNotify(CameraToSliderZ(initCameraPos.z));
-            distanceToTarget = initOffsetToTarget;
+            // from Locked to UnLocked
+            gameObject.transform.localPosition = target.localPosition + zoomDirScaled;
+            //zoomSlider.SetValueWithoutNotify(CameraToSlider(zoomSlider.value + distanceToTarget.magnitude));
+        }
+        else
+        {
+            distanceToTarget = zoomDirScaled;
+            // zoomSlider.SetValueWithoutNotify(CameraToSlider(zoomSlider.value - distanceToTarget.magnitude));
         }
     }
 
     public void SetCameraLocked(bool isLocked)
     {
         isLockedOnTarget = isLocked;
-        Debug.Log(isLockedOnTarget);
-        if (isLockedOnTarget)
+        if (!isLockedOnTarget)
         {
-            zoomSlider.SetValueWithoutNotify(CameraToSliderZ(initCameraPos.z));
-            distanceToTarget = initOffsetToTarget;
+            // from Locked to UnLocked
+            zoomSlider.SetValueWithoutNotify(CameraToSlider(zoomSlider.value + distanceToTarget.magnitude));
+        }
+        else
+        {
+            zoomSlider.SetValueWithoutNotify(CameraToSlider(zoomSlider.value - distanceToTarget.magnitude));
         }
     }
     
-    public float GetSliderMinZ()
+    public float GetSliderMin()
     {
-        if (minZ<0 && maxZ<0)
-            return CameraToSliderZ(maxZ);
+        if (minCameraDist<0 && maxCameraDist<0)
+            return CameraToSlider(maxCameraDist);
         else
-            return CameraToSliderZ(minZ);
+            return CameraToSlider(minCameraDist);
     }
 
-    public float GetSliderMaxZ()
+    public float GetSliderMax()
     {
-        if (minZ<0 && maxZ<0)
-            return CameraToSliderZ(minZ);
+        if (minCameraDist<0 && maxCameraDist<0)
+            return CameraToSlider(minCameraDist);
         else
-            return CameraToSliderZ(maxZ);
+            return CameraToSlider(maxCameraDist);
     }
 
-    public float CameraToSliderZ(float value)
+    public float CameraToSlider(float value)
     {
-        return Mathf.Log(-value);
+        // return Mathf.Log(value);
+        return value;
     }
 
-    public float SliderToCameraZ(float value)
+    public float SliderToCamera(float value)
     {
-        return -Mathf.Exp(value);
+        // return Mathf.Exp(value);
+        return value;
     }
 }

@@ -23,38 +23,10 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private RectTransform playButton;
     [SerializeField] private RectTransform resetButton;
 
-    [Header("Rocket Variables")]
-    [SerializeField] private GameObject rocket;
-    [SerializeField] private BoolVariable rocketIsInteractiveUp;
-    [SerializeField] private BoolVariable rocketIsInteractiveDown;
-    [SerializeField] private BoolVariable rocketIsInteractiveLeft;
-    [SerializeField] private BoolVariable rocketIsInteractiveRight;
-    [SerializeField] private Vector3Variable rocketVelocity;
-    [SerializeField] private GameObject rocketVelocityVector;
-    [SerializeField] private BoolVariable showVelocityEquation;
-    [SerializeField] private GameObject velocityLabel;
-    [SerializeField] private BoolVariable showRocketPath;
-    [SerializeField] private RectTransform showRocketPathToggle;
-
-    [Header("Thrust Variables")]
-    [SerializeField] private BoolVariable thrustIsActive;
-    [SerializeField] private BoolVariable thrustIsInteractive;
-    [SerializeField] private Vector3Variable thrustForce;
-    [SerializeField] private BoolVariable thrustShowVector;
-    [SerializeField] private GameObject thrustShowLabel;
-    [SerializeField] private BoolVariable thrustShowEquation;
-
-    [Header("Rocket Controls")]
-    [SerializeField] private RectTransform keyUpBtn;
-    [SerializeField] private RectTransform keyDownBtn;
-    [SerializeField] private RectTransform keyLeftBtn;
-    [SerializeField] private RectTransform keyRightBtn;
-
-    [Header("Extra")]
-    [SerializeField] private GameObject referenceFrame;
-    [SerializeField] private RectTransform asteroidButton;
-    [SerializeField] private FloatVariable asteroidCollisionSpeed;
-
+    [Header("Main object variables")]
+    [SerializeField] private Transform mainObject;
+    [SerializeField] private RectTransform showPathToggle;
+    [SerializeField] private BoolVariable showPath;
     public override void Awake()
     {
         base.Awake();
@@ -77,66 +49,38 @@ public class AppManager : Singleton<AppManager>
 
     public void ResetApp()
     {
-        // Main control config:
+        // ============= Main control =============
         playButton.gameObject.SetActive(currentAffordances.showPlayButton);
         resetButton.gameObject.SetActive(currentAffordances.showResetButton);
-        // Rocket config:
-        rocket.transform.SetPositionAndRotation(currentAffordances.physicalObject.initialPosition.ToVector3(), Quaternion.identity);
-        rocket.transform.Find("RocketObject").transform.rotation = Quaternion.Euler(currentAffordances.physicalObject.initialRotation.ToVector3());
-        rocketVelocity.Value = currentAffordances.physicalObject.initialVelocity.ToVector3();
-        rocketVelocityVector.SetActive(currentAffordances.physicalObject.showVelocityVector);
-        rocketVelocityVector.GetComponent<DraggableVector>().SetInteractable(currentAffordances.physicalObject.velocityVectorIsInteractive);
-        rocketVelocityVector.GetComponent<DraggableVector>().Redraw();
         
         playButton.GetComponent<PlayButton>().PlayWithoutRaising();
-        rocket.GetComponent<Rigidbody>().isKinematic = false;
-        rocket.GetComponent<Rigidbody>().velocity = rocketVelocity.Value;
-
-        velocityLabel.SetActive(currentAffordances.physicalObject.showVelocityLabel);
-        showVelocityEquation.Value = currentAffordances.physicalObject.showVelocityEquation;
-        rocketIsInteractiveUp.Value = currentAffordances.physicalObject.isInteractiveUp;
-        rocketIsInteractiveDown.Value = currentAffordances.physicalObject.isInteractiveDown;
-        rocketIsInteractiveRight.Value = currentAffordances.physicalObject.isInteractiveRight;
-        rocketIsInteractiveLeft.Value = currentAffordances.physicalObject.isInteractiveLeft;
-
-        keyUpBtn.gameObject.SetActive(currentAffordances.physicalObject.isInteractiveUp);
-        keyDownBtn.gameObject.SetActive(currentAffordances.physicalObject.isInteractiveDown);
-        keyLeftBtn.gameObject.SetActive(currentAffordances.physicalObject.isInteractiveLeft);
-        keyRightBtn.gameObject.SetActive(currentAffordances.physicalObject.isInteractiveRight);
-
-        // Path Renderer config:
-        showRocketPath.Value = currentAffordances.physicalObject.showTrace;
-        showRocketPathToggle.gameObject.SetActive(currentAffordances.physicalObject.showTraceIsInteractive);
-        showRocketPathToggle.GetComponent<ToggleStartActivation>().SetToggleVisibility(currentAffordances.physicalObject.showTrace);
-        // Thrust Config:
-        thrustIsActive.Value = currentAffordances.thrustForce.isActive;
-        thrustShowVector.Value = currentAffordances.thrustForce.showVector;
-
-        thrustForce.Value = Vector3.up * currentAffordances.thrustForce.initialMagnitude;
-        thrustForce.Value = Quaternion.Euler(currentAffordances.physicalObject.initialRotation.ToVector3()) * thrustForce.Value;
-
-        thrustShowEquation.Value = currentAffordances.thrustForce.showEquation;
-        thrustShowLabel.SetActive(currentAffordances.thrustForce.showLabel);
-        thrustIsInteractive.Value = currentAffordances.thrustForce.isInteractive;
-
-        // Camera:
+        
+        // ============= Camera =============
         Vector3 cameraPos = currentAffordances.camera.position.ToVector3();
         cameraLockingToggle.SetWithoutRaising(currentAffordances.camera.isLockedOnObject);
+
         Slider zoomSlider = cameraZoomSlider.GetComponent<Slider>();
         CameraManager cameraManager = mainCamera.GetComponent<CameraManager>();
-        float cameraZ = Mathf.Clamp(cameraPos.z, cameraManager.minZ, cameraManager.maxZ);
-        zoomSlider.minValue = cameraManager.GetSliderMinZ();
-        zoomSlider.maxValue = cameraManager.GetSliderMaxZ();
-        zoomSlider.SetValueWithoutNotify(cameraManager.CameraToSliderZ(cameraZ));
+        float minDistanceToObject = (mainObject.localScale.x + mainObject.localScale.y + mainObject.localScale.z)/3;
+        // Init camera
         mainCamera.InitCamera(
-            new Vector3(cameraPos.x, cameraPos.y, cameraZ),
-            currentAffordances.camera.isLockedOnObject
+            cameraPos,
+            currentAffordances.camera.isLockedOnObject,
+            minDistanceToObject,
+            zoomSlider
         );
+        // Init zoom slider
+        float distanceToObject = (cameraPos - cameraManager.target.localPosition).magnitude;
+        // float zoomScale = Mathf.Clamp(distanceToObject, minDistanceToObject, cameraManager.GetSliderMax());
+        zoomSlider.minValue = 1;
+        zoomSlider.maxValue = cameraManager.GetSliderMax();
+        // zoomSlider.SetValueWithoutNotify(cameraManager.CameraToSlider(zoomScale));
+
         cameraControls.gameObject.SetActive(currentAffordances.camera.showCameraControl);
-        
-        // Extra:
-        referenceFrame.SetActive(currentAffordances.showReferenceFrame);
-        asteroidButton.gameObject.SetActive(currentAffordances.showAsteroidButton);
-        asteroidCollisionSpeed.Value = currentAffordances.asteroidCollisionForce;
+
+        // ============= Path Renderer =============
+        showPath.Value = currentAffordances.physicalObject.showTrace;
+        showPathToggle.gameObject.SetActive(currentAffordances.physicalObject.showTraceIsInteractive);
+        showPathToggle.GetComponent<ToggleStartActivation>().SetToggleVisibility(currentAffordances.physicalObject.showTrace);
     }
 }

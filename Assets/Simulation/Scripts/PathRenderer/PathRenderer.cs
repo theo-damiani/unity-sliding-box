@@ -7,15 +7,15 @@ public class PathRenderer : MonoBehaviour
     [SerializeField] private BoolReference showPath;
     [SerializeField] private Material materialTrail;
     [SerializeField] private GameObject startTrailIndicator;
-    [SerializeField] private BoolVariable isThurstActive;
-    [SerializeField] private GameObject startThrustIndicator;
-    [SerializeField] private GameObject endThrustIndicator;
+    [SerializeField] private BoolVariable isForceActive;
+    [SerializeField] private GameObject startForceIndicator;
+    [SerializeField] private GameObject endForceIndicator;
     private TrailRenderer trailRenderer;
     private GameObject startPoint;
     private bool isStartPointSet = false;
-    private List<GameObject> startThrustPoints;
-    private List<GameObject> endThrustPoints;
-    private bool isStartThrustIndicatorSet = false;
+    private List<GameObject> startForcePoints;
+    private List<GameObject> endForcePoints;
+    private bool isStartForceIndicatorSet = false;
 
     // Start is called before the first frame update
     void Start()
@@ -43,9 +43,9 @@ public class PathRenderer : MonoBehaviour
 
         trailRenderer.sortingOrder = 1;
 
-        isStartThrustIndicatorSet = false;
-        startThrustPoints = new List<GameObject>();
-        endThrustPoints = new List<GameObject>();
+        isStartForceIndicatorSet = false;
+        startForcePoints = new List<GameObject>();
+        endForcePoints = new List<GameObject>();
     }
 
     void Update()
@@ -65,21 +65,21 @@ public class PathRenderer : MonoBehaviour
             return;
         } 
 
-        if ((!isStartThrustIndicatorSet) && isThurstActive.Value)
+        if ((!isStartForceIndicatorSet) && isForceActive.Value)
         {
-            GameObject startThurstPoint = Instantiate(startThrustIndicator);
+            GameObject startThurstPoint = Instantiate(startForceIndicator);
             startThurstPoint.transform.localPosition = transform.localPosition;
-            startThrustPoints.Add(startThurstPoint);
+            startForcePoints.Add(startThurstPoint);
 
-            isStartThrustIndicatorSet = true;
+            isStartForceIndicatorSet = true;
         }
 
-        if (isStartThrustIndicatorSet && (!isThurstActive.Value))
+        if (isStartForceIndicatorSet && (!isForceActive.Value))
         {
-            GameObject endThurstPoint = Instantiate(endThrustIndicator);
+            GameObject endThurstPoint = Instantiate(endForceIndicator);
             endThurstPoint.transform.localPosition = transform.localPosition;
-            endThrustPoints.Add(endThurstPoint);
-            isStartThrustIndicatorSet = false;
+            endForcePoints.Add(endThurstPoint);
+            isStartForceIndicatorSet = false;
         }
     }
 
@@ -109,13 +109,13 @@ public class PathRenderer : MonoBehaviour
             isStartPointSet = false;
         }
 
-        if (startThrustPoints!=null)
+        if (startForcePoints!=null)
         {
-            DestroyGameObjectList(startThrustPoints);
+            DestroyGameObjectList(startForcePoints);
         }
-        if (endThrustPoints!=null)
+        if (endForcePoints!=null)
         {
-            DestroyGameObjectList(endThrustPoints);
+            DestroyGameObjectList(endForcePoints);
         }
     }
 
