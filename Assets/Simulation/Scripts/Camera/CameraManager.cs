@@ -23,8 +23,8 @@ public class CameraManager : MonoBehaviour
             GameObject newTarget = new("Camera Target");
             newTarget.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
             target = newTarget.transform;
+            InitCamera(target, Vector3.back*5, false, 0.1f, zoomSlider);
         }
-        InitCamera(target, Vector3.back*5, false, 0.1f, zoomSlider);
     }
 
     public void InitCamera(Transform target, Vector3 initPos, bool isLocked, float minDistanceToObject, Slider uiSlider)
@@ -39,7 +39,6 @@ public class CameraManager : MonoBehaviour
         gameObject.transform.localPosition = target.localPosition + initPos;
         previousTargetPos = target.localPosition;
         isLockedOnTarget = isLocked;
-        zoomDirScaled = Vector3.zero;
         // Check if initial pos is in bounds
         initOffsetToTarget = initPos;
         float initOffsetClamped = Mathf.Clamp(initOffsetToTarget.magnitude, minDistanceToObject, GetSliderMax());
@@ -48,6 +47,7 @@ public class CameraManager : MonoBehaviour
         distanceToTarget = initOffsetToTarget;
         minDistanceToTarget = (initPos - target.localPosition).normalized * minDistanceToObject;
         uiSlider.SetValueWithoutNotify(CameraToSlider(initOffsetToTarget.magnitude));
+        zoomDirScaled = minDistanceToTarget * initOffsetToTarget.magnitude;
     
         zoomSlider = uiSlider;
     }
