@@ -57,6 +57,18 @@ public class AppManager : Singleton<AppManager>
         resetButton.gameObject.SetActive(currentAffordances.showResetButton);
         
         playButton.GetComponent<PlayButton>().PlayWithoutRaising();
+
+        // ============= Box =============
+        // need to set mainObject
+        mainObject.localPosition = currentAffordances.physicalObject.initialPosition.ToVector3();
+
+        boxVelocity.Value = currentAffordances.physicalObject.initialVelocity.ToVector3();
+        boxVelocityVector.gameObject.SetActive(currentAffordances.physicalObject.showVelocityVector);
+        boxVelocityVector.SetInteractable(currentAffordances.physicalObject.velocityVectorIsInteractive);
+        boxVelocityVector.Redraw();
+
+        mainObject.GetComponent<Rigidbody>().isKinematic = false;
+        mainObject.GetComponent<Rigidbody>().velocity = boxVelocity.Value;
         
         // ============= Camera =============
         Vector3 cameraPos = currentAffordances.camera.position.ToVector3();
@@ -66,6 +78,7 @@ public class AppManager : Singleton<AppManager>
         float minDistanceToObject = (mainObject.localScale.x + mainObject.localScale.y + mainObject.localScale.z)/3;
         // Init camera
         mainCamera.InitCamera(
+            mainObject,
             cameraPos,
             currentAffordances.camera.isLockedOnObject,
             minDistanceToObject,
@@ -73,15 +86,6 @@ public class AppManager : Singleton<AppManager>
         );
 
         cameraControls.gameObject.SetActive(currentAffordances.camera.showCameraControl);
-
-        // ============= Box =============
-        boxVelocity.Value = currentAffordances.physicalObject.initialVelocity.ToVector3();
-        boxVelocityVector.gameObject.SetActive(currentAffordances.physicalObject.showVelocityVector);
-        boxVelocityVector.SetInteractable(currentAffordances.physicalObject.velocityVectorIsInteractive);
-        boxVelocityVector.Redraw();
-
-        mainObject.GetComponent<Rigidbody>().isKinematic = false;
-        mainObject.GetComponent<Rigidbody>().velocity = boxVelocity.Value;
 
         // ============= Path Renderer =============
         showPath.Value = currentAffordances.physicalObject.showTrace;

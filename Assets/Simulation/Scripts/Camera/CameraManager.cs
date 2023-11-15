@@ -6,18 +6,31 @@ using UnityEngine.UI;
 public class CameraManager : MonoBehaviour
 {
     public Transform target;
-    public float minCameraDist;
     public float maxCameraDist;
-    [HideInInspector] public bool isLockedOnTarget = true;
-    [HideInInspector] public Slider zoomSlider;
+    public bool isLockedOnTarget = true;
+    public Slider zoomSlider;
+
     private Vector3 initOffsetToTarget;
     private Vector3 distanceToTarget;
     private Vector3 minDistanceToTarget;
     private Vector3 zoomDirScaled = Vector3.zero;
     private Vector3 previousTargetPos;
 
-    public void InitCamera(Vector3 initPos, bool isLocked, float minDistanceToObject, Slider uiSlider)
+    void Start()
     {
+        if (!target)
+        {
+            GameObject newTarget = new("Camera Target");
+            newTarget.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            target = newTarget.transform;
+        }
+        InitCamera(target, Vector3.back*5, false, 0.1f, zoomSlider);
+    }
+
+    public void InitCamera(Transform target, Vector3 initPos, bool isLocked, float minDistanceToObject, Slider uiSlider)
+    {
+        this.target = target;
+
         // min/max value config at the top, because it will change slider.value and so call the function ZoomInOutTarget!
         uiSlider.minValue = 1;
         uiSlider.maxValue = GetSliderMax();
@@ -26,6 +39,7 @@ public class CameraManager : MonoBehaviour
         gameObject.transform.localPosition = target.localPosition + initPos;
         previousTargetPos = target.localPosition;
         isLockedOnTarget = isLocked;
+        zoomDirScaled = Vector3.zero;
         // Check if initial pos is in bounds
         initOffsetToTarget = initPos;
         float initOffsetClamped = Mathf.Clamp(initOffsetToTarget.magnitude, minDistanceToObject, GetSliderMax());
@@ -87,20 +101,9 @@ public class CameraManager : MonoBehaviour
             distanceToTarget = zoomDirScaled;
         }
     }
-    
-    public float GetSliderMin()
-    {
-        if (minCameraDist<0 && maxCameraDist<0)
-            return CameraToSlider(maxCameraDist);
-        else
-            return CameraToSlider(minCameraDist);
-    }
 
     public float GetSliderMax()
     {
-        if (minCameraDist<0 && maxCameraDist<0)
-            return CameraToSlider(minCameraDist);
-        else
             return CameraToSlider(maxCameraDist);
     }
 
