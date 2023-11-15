@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -9,15 +6,17 @@ public class VectorRigidbodyBind : MonoBehaviour
     [SerializeField] private Vector3Variable velocityVector;
     [SerializeField] private DraggableVector vector;
     private Rigidbody rb;
+    private bool isPaused;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        isPaused = false;
     }
 
     void Update()
     {
-        if (!vector.IsDragged())
+        if ((!vector.IsDragged()) && (!isPaused))
         {
             SetVectorVelocity();
         }
@@ -25,12 +24,18 @@ public class VectorRigidbodyBind : MonoBehaviour
 
     public void OnEnable()
     {
-        VectorClickZone.OnZoneMouseUp += SetRigidbodyVelocity;
+        if (vector)
+        {
+            vector.GetHeadClickZone().OnZoneMouseUp += SetRigidbodyVelocity;
+        }
     }
 
     private void OnDisable()
     {
-        VectorClickZone.OnZoneMouseUp -= SetRigidbodyVelocity;
+        if (vector)
+        {
+            vector.GetHeadClickZone().OnZoneMouseUp -= SetRigidbodyVelocity;
+        }
     }
 
     public void SetRigidbodyVelocity(VectorClickZone clickZone)
@@ -47,5 +52,10 @@ public class VectorRigidbodyBind : MonoBehaviour
         }
         velocityVector.Value = rb.velocity;
         vector.Redraw();
+    }
+
+    public void SetIsPaused(bool value)
+    {
+        isPaused = value;
     }
 }

@@ -57,14 +57,18 @@ public class DraggableVector : Vector
 
         Redraw();
 
-        VectorClickZone.OnZoneMouseDown += HandleZoneMouseDown;
-        VectorClickZone.OnZoneMouseUp += HandleZoneMouseUp;
+        headClickZone.OnZoneMouseDown += HandleZoneMouseDown;
+        tailClickZone.OnZoneMouseDown += HandleZoneMouseDown;
+        headClickZone.OnZoneMouseUp += HandleZoneMouseUp;
+        tailClickZone.OnZoneMouseUp += HandleZoneMouseUp;
     }
 
     private void OnDisable()
     {
-        VectorClickZone.OnZoneMouseDown -= HandleZoneMouseDown;
-        VectorClickZone.OnZoneMouseUp -= HandleZoneMouseUp;
+        headClickZone.OnZoneMouseDown -= HandleZoneMouseDown;
+        tailClickZone.OnZoneMouseDown -= HandleZoneMouseDown;
+        headClickZone.OnZoneMouseUp -= HandleZoneMouseUp;
+        tailClickZone.OnZoneMouseUp -= HandleZoneMouseUp;
     }
 
     public void HandleZoneMouseDown(VectorClickZone clickZone)
@@ -283,5 +287,15 @@ public class DraggableVector : Vector
     public bool IsDragged()
     {
         return draggingHead | draggingTail;
+    }
+
+    public VectorClickZone GetHeadClickZone()
+    {
+        return headClickZone;
+    }
+
+    public VectorClickZone GetTailClickZone()
+    {
+        return tailClickZone;
     }
 }

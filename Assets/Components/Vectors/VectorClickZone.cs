@@ -12,8 +12,8 @@ public class VectorClickZone : MonoBehaviour
 
     private MeshRenderer mesh;
 
-    public static event Action<VectorClickZone> OnZoneMouseDown;
-    public static event Action<VectorClickZone> OnZoneMouseUp;
+    public event Action<VectorClickZone> OnZoneMouseDown;
+    public event Action<VectorClickZone> OnZoneMouseUp;
 
     private bool mouseIsDown;
 
