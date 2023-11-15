@@ -15,6 +15,7 @@ public class DraggableVector : Vector
     [SerializeField] private Vector3 customPlaneCenter;
     [SerializeField] private Vector3 customPlaneNormal;
     [field: SerializeField] public bool VectorIsOnlyScalable {get; set;} = false;
+    [SerializeField] private Vector3Reference DragDirectionIfOnlyScalable;
 
     [Header("Sticky Point")]
     public bool useStickyPoint;
@@ -168,7 +169,7 @@ public class DraggableVector : Vector
 
                     if (VectorIsOnlyScalable)
                     {
-                        newComponents = Vector3.Project(newComponents, components.Value);
+                        newComponents = Vector3.Project(newComponents, DragDirectionIfOnlyScalable.Value);
                     }
 
                     // Snap the direction
