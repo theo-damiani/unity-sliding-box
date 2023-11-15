@@ -30,6 +30,14 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private Vector3Variable boxVelocity;
     [SerializeField] private DraggableVector boxVelocityVector;
 
+    [Header("Force Pushing Object 1")]
+    [SerializeField] private BoolVariable push1IsActive;
+    [SerializeField] private BoolVariable push1IsInteractive;
+    [SerializeField] private Vector3Variable push1Force;
+    [SerializeField] private BoolVariable push1ShowVector;
+    [SerializeField] private GameObject push1ShowLabel;
+    [SerializeField] private BoolVariable push1ShowEquation;
+
     public override void Awake()
     {
         base.Awake();
@@ -58,7 +66,7 @@ public class AppManager : Singleton<AppManager>
         
         playButton.GetComponent<PlayButton>().PlayWithoutRaising();
 
-        // ============= Box =============
+        // ============= Box 1 =============
         // need to set mainObject
         mainObject.localPosition = currentAffordances.physicalObject.initialPosition.ToVector3();
 
@@ -69,6 +77,17 @@ public class AppManager : Singleton<AppManager>
 
         mainObject.GetComponent<Rigidbody>().isKinematic = false;
         mainObject.GetComponent<Rigidbody>().velocity = boxVelocity.Value;
+
+        // ============= Push 1 =============
+        push1IsActive.Value = currentAffordances.push1Force.isActive;
+        push1ShowVector.Value = currentAffordances.push1Force.showVector;
+
+        push1Force.Value = Vector3.right * currentAffordances.push1Force.initialMagnitude;
+        push1Force.Value = Quaternion.Euler(currentAffordances.physicalObject.initialRotation.ToVector3()) * push1Force.Value;
+
+        push1ShowEquation.Value = currentAffordances.push1Force.showEquation;
+        push1ShowLabel.SetActive(currentAffordances.push1Force.showLabel);
+        push1IsInteractive.Value = currentAffordances.push1Force.isInteractive;
         
         // ============= Camera =============
         Vector3 cameraPos = currentAffordances.camera.position.ToVector3();

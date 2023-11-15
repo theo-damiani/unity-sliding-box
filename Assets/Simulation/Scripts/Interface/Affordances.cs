@@ -12,7 +12,7 @@ public class Affordances : ScriptableObject
     public A_Camera camera;
     public bool showReferenceFrame;
     public A_PhysicalObject physicalObject;
-    public A_Force thrustForce;
+    public A_Force push1Force;
     public bool showAsteroidButton;
     public float asteroidCollisionForce;
 }

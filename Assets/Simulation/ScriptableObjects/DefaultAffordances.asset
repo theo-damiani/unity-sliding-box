@@ -41,18 +41,18 @@ MonoBehaviour:
       Z: 0
     showVelocityVector: 1
     initialVelocity:
-      X: 2
+      X: 0
       Y: 0
       Z: 0
     velocityVectorIsInteractive: 1
     showVelocityLabel: 0
     showVelocityEquation: 0
-  thrustForce:
+  push1Force:
     isActive: 0
     isInteractive: 0
     showVector: 0
     showLabel: 0
     showEquation: 0
-    initialMagnitude: 0
+    initialMagnitude: 3
   showAsteroidButton: 0
   asteroidCollisionForce: 0

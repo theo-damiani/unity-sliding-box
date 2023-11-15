@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class  Motion : ScriptableObject, IMotion
 {
-    public Vector3Reference velocity;
+    public Vector3Reference force;
     public abstract void ApplyMotion(Rigidbody rigidbody);
     public abstract void InitMotion(Rigidbody rigidbody);
 }
