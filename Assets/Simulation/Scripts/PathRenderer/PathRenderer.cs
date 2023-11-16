@@ -7,6 +7,7 @@ public class PathRenderer : MonoBehaviour
     [SerializeField] private BoolReference showPath;
     [SerializeField] private Material materialTrail;
     [SerializeField] private GameObject startTrailIndicator;
+    [SerializeField] private bool useStartEndIndicator;
     [SerializeField] private BoolVariable isForceActive;
     [SerializeField] private GameObject startForceIndicator;
     [SerializeField] private GameObject endForceIndicator;
@@ -64,6 +65,11 @@ public class PathRenderer : MonoBehaviour
 
             return;
         } 
+
+        if (!useStartEndIndicator)
+        {
+            return;
+        }
 
         if ((!isStartForceIndicatorSet) && isForceActive.Value)
         {

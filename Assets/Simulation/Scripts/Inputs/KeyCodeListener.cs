@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CallEvents : MonoBehaviour
+public class KeyCodeListener : MonoBehaviour
 {
     public BoolReference isActive;
     public KeyCode key;

@@ -49,7 +49,7 @@ MonoBehaviour:
     showVelocityEquation: 0
   push1Force:
     isActive: 0
-    isInteractive: 0
+    isInteractive: 1
     showVector: 0
     showLabel: 0
     showEquation: 0
