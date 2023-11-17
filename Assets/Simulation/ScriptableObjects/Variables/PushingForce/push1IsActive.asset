@@ -21,4 +21,4 @@ MonoBehaviour:
   _minClampedValue: 0
   _maxClampedValue: 0
   _defaultValue: 0
-  OnUpdateEvent: {fileID: 0}
+  OnUpdateEvent: {fileID: 11400000, guid: f7e3275f004c52a1e9670e1471018508, type: 2}

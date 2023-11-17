@@ -50,7 +50,7 @@ MonoBehaviour:
   push1Force:
     isActive: 0
     isInteractive: 1
-    showVector: 0
+    showVector: 1
     showLabel: 0
     showEquation: 0
     initialMagnitude: 3

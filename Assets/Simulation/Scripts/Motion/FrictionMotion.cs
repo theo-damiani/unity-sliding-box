@@ -32,6 +32,10 @@ public class FrictionMotion : Motion
         }
         else
         {
+            if (Mathf.Approximately(rigidbody.velocity.sqrMagnitude, 0))
+            {
+                return;
+            }
             //if (Mathf.Approximately(rigidbody.velocity.sqrMagnitude, 0))
             if (rigidbody.velocity.sqrMagnitude <= 0.01)
             {
