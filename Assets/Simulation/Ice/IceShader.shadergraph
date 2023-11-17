@@ -32,6 +32,9 @@
         },
         {
             "m_Id": "d5e9ecf11cfc428d892b7eaabcea3d27"
+        },
+        {
+            "m_Id": "7dd75365a18c49dbb1da248b6d371b39"
         }
     ],
     "m_Keywords": [],
@@ -602,8 +605,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -3256.0,
-            "y": 694.0,
+            "x": -3267.999755859375,
+            "y": 719.9999389648438,
             "width": 93.0,
             "height": 34.0
         }
@@ -918,10 +921,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1436.0001220703125,
-            "y": 199.99998474121095,
-            "width": 208.0,
-            "height": 326.0
+            "x": -1452.0,
+            "y": 200.00003051757813,
+            "width": 207.9998779296875,
+            "height": 325.9999694824219
         }
     },
     "m_Slots": [
@@ -1339,10 +1342,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2272.000244140625,
-            "y": 418.0,
-            "width": 208.0,
-            "height": 302.00006103515627
+            "x": -2130.0,
+            "y": 408.9999694824219,
+            "width": 208.0001220703125,
+            "height": 302.0000305175781
         }
     },
     "m_Slots": [
@@ -2404,6 +2407,34 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "7dd75365a18c49dbb1da248b6d371b39",
+    "m_Guid": {
+        "m_GuidSerialized": "dde15756-d14f-426b-a321-74fc0a2f1fbf"
+    },
+    "m_Name": "Drag",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Drag",
+    "m_DefaultReferenceName": "_Drag",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 1,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "803e8fa8ce684b9ca57d6f533bc03eaf",
@@ -2646,6 +2677,9 @@
         },
         {
             "m_Id": "d5e9ecf11cfc428d892b7eaabcea3d27"
+        },
+        {
+            "m_Id": "7dd75365a18c49dbb1da248b6d371b39"
         }
     ]
 }
@@ -2984,10 +3018,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2520.000244140625,
-            "y": 201.99998474121095,
+            "x": -2404.0,
+            "y": 193.0,
             "width": 208.0,
-            "height": 313.00006103515627
+            "height": 312.9999694824219
         }
     },
     "m_Slots": [
@@ -3248,10 +3282,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1986.0001220703125,
-            "y": 286.0,
+            "x": -1870.0,
+            "y": 277.0000305175781,
             "width": 208.0,
-            "height": 302.0
+            "height": 301.9999694824219
         }
     },
     "m_Slots": [

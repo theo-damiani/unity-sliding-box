@@ -28,8 +28,8 @@ public class FloatReference
         get { return UseConstant ? ConstantValue : Variable.Value; }
     }
 
-    // public static implicit operator float(FloatReference reference)
-    // {
-    //     return reference.Value;
-    // }
+    public GameEvent OnUpdateEvent
+    {
+        get { return UseConstant ? null : Variable.OnUpdateEvent;}
+    }
 }
