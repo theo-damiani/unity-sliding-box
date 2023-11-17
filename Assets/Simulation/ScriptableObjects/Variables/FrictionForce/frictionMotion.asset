@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f18677b064579246933d6e05bcb0e45, type: 3}
+  m_Name: frictionMotion
+  m_EditorClassIdentifier: 
+  frictionMaxCoeff:
+    UseConstant: 0
+    ConstantValue: 1
+    Variable: {fileID: 11400000, guid: 8ea8bd7c406c7ed3ca193a4f36bbb96a, type: 2}
+  objectMass:
+    UseConstant: 1
+    ConstantValue: 1
+    Variable: {fileID: 0}
+  appliedForceOnObject:
+    UseConstant: 0
+    ConstantValue: {x: 0, y: 0, z: 0}
+    Variable: {fileID: 11400000, guid: 1b516b265880aeaeaa7d69b05dac0fbf, type: 2}
+  appliedForceIsActive:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: cb1e70f530fc5d438b6408c0f21fe751, type: 2}

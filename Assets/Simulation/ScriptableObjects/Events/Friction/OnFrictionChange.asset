@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39953326c52a3434f81d5d649c19d65c, type: 3}
-  m_Name: OnDragChanged
+  m_Name: OnFrictionChange
   m_EditorClassIdentifier: 

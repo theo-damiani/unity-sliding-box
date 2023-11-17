@@ -22,7 +22,6 @@ public class MotionManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        // rb.velocity = Vector3.zero;
         for (int i = 0; i < listMotionData.Length; i++)
         {
             if (listMotionData[i].isActive.Value)

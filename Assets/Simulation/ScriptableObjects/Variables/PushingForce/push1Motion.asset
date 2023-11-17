@@ -16,4 +16,7 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: {x: 0, y: 0, z: 0}
     Variable: {fileID: 11400000, guid: 1b516b265880aeaeaa7d69b05dac0fbf, type: 2}
-  forceScale: 1
+  objectMass:
+    UseConstant: 1
+    ConstantValue: 1
+    Variable: {fileID: 0}
