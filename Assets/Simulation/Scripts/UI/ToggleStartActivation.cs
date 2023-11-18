@@ -14,4 +14,18 @@ public class ToggleStartActivation : MonoBehaviour
         toggleOn.isOn = value;
         toggleOff.isOn = !value;
     }
+
+    public void SetToggleVisibilityWithoutNotify(bool value)
+    {
+        toggleOff.SetIsOnWithoutNotify(!value);
+        //toggleOff.GetComponent<Image>().raycastTarget = !value;
+        toggleOn.SetIsOnWithoutNotify(value);
+        //toggleOn.GetComponent<Image>().raycastTarget = value;
+    }
+
+    public void SetToggleOff()
+    {
+        toggleOn.isOn = false;
+        toggleOff.isOn = true;
+    }
 }

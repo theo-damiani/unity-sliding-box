@@ -37,6 +37,8 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private BoolVariable push1ShowVector;
     [SerializeField] private GameObject push1ShowLabel;
     [SerializeField] private BoolVariable push1ShowEquation;
+    [SerializeField] private RectTransform push1ConfigBtn;
+    [SerializeField] private DraggableVector push1Vector;
 
     public override void Awake()
     {
@@ -88,6 +90,10 @@ public class AppManager : Singleton<AppManager>
         push1ShowEquation.Value = currentAffordances.push1Force.showEquation;
         push1ShowLabel.SetActive(currentAffordances.push1Force.showLabel);
         push1IsInteractive.Value = currentAffordances.push1Force.isInteractive;
+
+        push1ConfigBtn.gameObject.SetActive(true); // currentAffordances.push1Force.IsConfigurable
+        push1ConfigBtn.GetComponent<ToggleIcons>().SetWithoutRaising(false);
+        push1Vector.SetInteractable(true); // currentAffordances.push1Force.IsConfigurable
         
         // ============= Camera =============
         Vector3 cameraPos = currentAffordances.camera.position.ToVector3();

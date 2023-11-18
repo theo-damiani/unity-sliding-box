@@ -1,14 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ToggleIcons : MonoBehaviour
 {
     [SerializeField] private Image icon;
     [SerializeField] private Sprite trueIcon;
+    [SerializeField] private Color trueColor;
     [SerializeField] private Sprite falseIcon;
-    [SerializeField] private List<GameEvent> OnTrueEventList;
-    [SerializeField] private List<GameEvent> OnFalseEventList;
+    [SerializeField] private Color falseColor;
+
+    [SerializeField] private UnityEvent OnTrueEventList;
+    [SerializeField] private UnityEvent OnFalseEventList;
 
     private bool isTrue = false;
 
@@ -16,8 +20,17 @@ public class ToggleIcons : MonoBehaviour
     {
         isTrue = true;
         if (icon) icon.sprite = trueIcon;
+        icon.color = trueColor;
 
-        RaiseEventsInList(OnTrueEventList);
+        OnTrueEventList?.Invoke();
+    }
+
+    public void SetToFalse()
+    {
+        isTrue = false;
+        if (icon) icon.sprite = falseIcon;
+
+        OnFalseEventList?.Invoke();
     }
 
     public void SetWithoutRaising(bool isTrue)
@@ -26,19 +39,13 @@ public class ToggleIcons : MonoBehaviour
         if (isTrue)
         {
             if (icon) icon.sprite = trueIcon;
+            icon.color = trueColor;
         }
         else
         {
             if (icon) icon.sprite = falseIcon;
+            icon.color = falseColor;
         }
-    }
-
-    public void SetToFalse()
-    {
-        isTrue = false;
-        if (icon) icon.sprite = falseIcon;
-
-        RaiseEventsInList(OnFalseEventList);
     }
 
     public void ToggleTrueFalse()
@@ -50,14 +57,6 @@ public class ToggleIcons : MonoBehaviour
         else
         {
             SetToTrue();
-        }
-    }
-
-    private void RaiseEventsInList(List<GameEvent> listGameEvents)
-    {
-        foreach (GameEvent e in listGameEvents)
-        {
-            e.Raise();
         }
     }
 }

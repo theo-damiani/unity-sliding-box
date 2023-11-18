@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayButton : MonoBehaviour
@@ -7,17 +8,18 @@ public class PlayButton : MonoBehaviour
     [SerializeField] private Image icon;
     [SerializeField] private Sprite playIcon;
     [SerializeField] private Sprite pauseIcon;
-    [SerializeField] private List<GameEvent> OnPlayEventList;
-    [SerializeField] private List<GameEvent> OnPauseEventList;
+    [SerializeField] private UnityEvent OnPlayEventList;
+    [SerializeField] private UnityEvent OnPauseEventList;
 
     private bool isPaused = false;
+    private bool _oldIsPaused = false;
 
     public void Play()
     {
         isPaused = false;
         if (icon) icon.sprite = pauseIcon;
 
-        RaiseEventsInList(OnPlayEventList);
+        OnPlayEventList?.Invoke();
     }
 
     public void PlayWithoutRaising()
@@ -28,29 +30,39 @@ public class PlayButton : MonoBehaviour
 
     public void Pause()
     {
+        if (isPaused)
+        {
+            return;
+        }
         isPaused = true;
         if (icon) icon.sprite = playIcon;
 
-        RaiseEventsInList(OnPauseEventList);
+        OnPauseEventList?.Invoke();
     }
 
     public void TogglePlayPause()
     {
         if (isPaused)
         {
+            _oldIsPaused = true;
             Play();
         }
         else
         {
+            _oldIsPaused = false;
             Pause();
         }
     }
 
-    private void RaiseEventsInList(List<GameEvent> listGameEvents)
+    public void RestoreState()
     {
-        foreach (GameEvent e in listGameEvents)
+        if (_oldIsPaused)
         {
-            e.Raise();
+            Pause();
+        }
+        else
+        {
+            Play();
         }
     }
 }
