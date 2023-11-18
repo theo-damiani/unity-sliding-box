@@ -40,6 +40,9 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private RectTransform push1ConfigBtn;
     [SerializeField] private DraggableVector push1Vector;
 
+    [Header("Friction 1")]
+    [SerializeField] private FloatVariable maxFrictionCoeff;
+
     public override void Awake()
     {
         base.Awake();
@@ -91,9 +94,15 @@ public class AppManager : Singleton<AppManager>
         push1ShowLabel.SetActive(currentAffordances.push1Force.showLabel);
         push1IsInteractive.Value = currentAffordances.push1Force.isInteractive;
 
+        // TODO:
         push1ConfigBtn.gameObject.SetActive(true); // currentAffordances.push1Force.IsConfigurable
         push1ConfigBtn.GetComponent<ToggleIcons>().SetWithoutRaising(false);
         push1Vector.SetInteractable(true); // currentAffordances.push1Force.IsConfigurable
+
+        // ============= Push 1 =============
+
+        // TODO:
+        maxFrictionCoeff.Value = 0.2f;
         
         // ============= Camera =============
         Vector3 cameraPos = currentAffordances.camera.position.ToVector3();

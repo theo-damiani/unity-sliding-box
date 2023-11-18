@@ -28,3 +28,7 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: cb1e70f530fc5d438b6408c0f21fe751, type: 2}
+  currentFriction:
+    UseConstant: 0
+    ConstantValue: {x: 0, y: 0, z: 0}
+    Variable: {fileID: 11400000, guid: 6c3ca7da2c0c107638de5f27758b3601, type: 2}

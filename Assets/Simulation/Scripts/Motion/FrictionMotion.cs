@@ -9,6 +9,7 @@ public class FrictionMotion : Motion
     [SerializeField] private FloatReference objectMass;
     [SerializeField] private Vector3Reference appliedForceOnObject;
     [SerializeField] private BoolReference appliedForceIsActive;
+    [SerializeField] private Vector3Reference currentFriction;
     private Vector3 appliedForceNorm;
 
     public override void InitMotion(Rigidbody rigidbody)
@@ -23,11 +24,13 @@ public class FrictionMotion : Motion
             if (frictionForce.sqrMagnitude >= appliedForceOnObject.Value.sqrMagnitude)
             {
                 rigidbody.AddForce(-appliedForceOnObject.Value*objectMass.Value, ForceMode.Force); // static friction
+                SetVectorRepresentation(-appliedForceOnObject.Value*objectMass.Value);
             }
             else
             {
                 //Debug.Log("kinetic: " +  frictionForce);
                 rigidbody.AddForce(frictionForce, ForceMode.Force); // kinetic friction
+                SetVectorRepresentation(frictionForce);
             }
         }
         else
@@ -41,14 +44,25 @@ public class FrictionMotion : Motion
             {
                 //Debug.Log("ZERO");
                 rigidbody.velocity = Vector3.zero;
+                SetVectorRepresentation(Vector3.zero);
                 return;
             }
             rigidbody.AddForce(frictionForce, ForceMode.Force); // kinetic friction
+            SetVectorRepresentation(frictionForce);
 
             //float decelleration = 2*rigidbody.velocity.sqrMagnitude/(2*frictionMaxCoeff.Value*Physics.gravity.y);
             // Debug.Log(1/decelleration);
             // rigidbody.AddForce(rigidbody.velocity.normalized*1/decelleration,  ForceMode.Acceleration);
             //rigidbody.AddForce()
         }
+    }
+
+    public void SetVectorRepresentation(Vector3 newComponents)
+    {
+        if (currentFriction.Value == newComponents)
+        {
+            return;
+        }
+        currentFriction.Value = newComponents;
     }
 }
