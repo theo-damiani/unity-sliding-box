@@ -7324,7 +7324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &987015711
 Transform:
   m_ObjectHideFlags: 0
@@ -13114,7 +13114,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.5}
+  m_LocalScale: {x: 3, y: 1, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1666462913}
@@ -13191,14 +13191,14 @@ MonoBehaviour:
   smoothnessOnIce: 0.5
   normalsOnIce: 0.45
   refractionOnIce: 0.2
-  frostPowerOnIce: 0.8
-  mainColorOnIce: {r: 0.018689778, g: 0.7212591, b: 1.3922372, a: 1}
+  frostPowerOnIce: 0.3
+  mainColorOnIce: {r: 0.18676092, g: 0.49751553, b: 0.78487986, a: 1}
   frostColorOnIce: {r: 1, g: 1, b: 1, a: 0}
-  metallicOnGrip: 0.5
-  smoothnessOnGrip: 0.3
+  metallicOnGrip: 0
+  smoothnessOnGrip: 0.4
   normalsOnGrip: 3
   refractionOnGrip: 0
-  frostPowerOnGrip: 0.8
+  frostPowerOnGrip: 0.7
   mainColorOnGrip: {r: 0, g: 0, b: 0, a: 0}
   frostColorOnGrip: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &1517034595
