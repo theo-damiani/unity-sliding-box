@@ -48,6 +48,8 @@ public class A_Force
 {
     public bool isActive;
     public bool isInteractive;
+    public bool isConstant;
+    public bool isConfigurable;
     public bool showVector;
     public bool showLabel;
     public bool showEquation;

@@ -39,15 +39,14 @@ public class FrictionMotion : Motion
             {
                 return;
             }
-            //if (Mathf.Approximately(rigidbody.velocity.sqrMagnitude, 0))
             if (rigidbody.velocity.sqrMagnitude <= 0.01)
             {
-                //Debug.Log("ZERO");
                 rigidbody.velocity = Vector3.zero;
                 SetVectorRepresentation(Vector3.zero);
                 return;
             }
             rigidbody.AddForce(frictionForce, ForceMode.Force); // kinetic friction
+            
             SetVectorRepresentation(frictionForce);
 
             //float decelleration = 2*rigidbody.velocity.sqrMagnitude/(2*frictionMaxCoeff.Value*Physics.gravity.y);

@@ -50,6 +50,8 @@ MonoBehaviour:
   push1Force:
     isActive: 0
     isInteractive: 1
+    isConstant: 1
+    isConfigurable: 1
     showVector: 1
     showLabel: 0
     showEquation: 0
