@@ -32,7 +32,7 @@ public class IceObject : MonoBehaviour
     void Start()
     {
         material.SetVector("_UV", Vector2.zero);
-        SetIceEffect();
+        SetMaterialFromDragValue();
 
         parentRigidbody = GetComponentInParent<Rigidbody>();
     }

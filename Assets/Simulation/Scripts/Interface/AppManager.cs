@@ -45,6 +45,8 @@ public class AppManager : Singleton<AppManager>
 
     [Header("Friction 1")]
     [SerializeField] private FloatVariable maxFrictionCoeff;
+    [SerializeField] private Vector frictionVector;
+    [SerializeField] private Slider frictionSlider;
 
     public override void Awake()
     {
@@ -116,6 +118,9 @@ public class AppManager : Singleton<AppManager>
 
         // TODO:
         maxFrictionCoeff.Value = 0.2f;
+        frictionSlider.SetValueWithoutNotify(0.2f);
+        frictionVector.components.Value = Vector3.zero;
+        frictionVector.Redraw();
         
         // ============= Camera =============
         Vector3 cameraPos = currentAffordances.camera.position.ToVector3();
