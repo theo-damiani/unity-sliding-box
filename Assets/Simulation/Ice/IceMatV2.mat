@@ -107,16 +107,19 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _Normals: 0.45
+    - _Normals: 0.96
     - _OcclusionStrength: 1
+    - _OpacityHardness: 0.7
+    - _OpacityPower: 7
+    - _OpacityRadius: 0.5
     - _Parallax: 0.005
     - _PowerOpcatiy: 10
     - _QueueControl: 0
     - _QueueOffset: -1
     - _RadiusOpcatiy: 1
     - _ReceiveShadows: 1
-    - _Refraction: 0.2
-    - _Smoothness: 0.5
+    - _Refraction: 0.16
+    - _Smoothness: 0.48
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -129,10 +132,10 @@ Material:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FrostColor: {r: 1, g: 1, b: 1, a: 0}
-    - _MainColor: {r: 0.018689778, g: 0.7212591, b: 1.3922372, a: 1}
+    - _MainColor: {r: 0.14940873, g: 0.39801243, b: 0.6279039, a: 0.8}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 3, g: 3, b: 0, a: 0}
-    - _UV: {r: -59.889812, g: 0, b: 0, a: 0}
+    - _UV: {r: -14.310006, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1446100501086654768
 MonoBehaviour:
