@@ -41,9 +41,11 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private DraggableVector pushVector;
 
     [Header("Friction 1")]
-    [SerializeField] private FloatVariable maxFrictionCoeff;
+    [SerializeField] private FloatVariable staticFrictionCoeff;
+    [SerializeField] private FloatVariable kineticFrictionCoeff;
     [SerializeField] private Vector frictionVector;
-    [SerializeField] private Slider frictionSlider;
+    [SerializeField] private Slider staticFrictionSlider;
+    [SerializeField] private Slider kineticFrictionSlider;
 
     [Header("Timer")]
     [SerializeField] private RectTransform timerToggle;
@@ -108,10 +110,13 @@ public class AppManager : Singleton<AppManager>
         // ============= Friction =============
 
         // TODO:
-        maxFrictionCoeff.Value = 0.2f;
-        frictionSlider.SetValueWithoutNotify(0.2f);
+        staticFrictionCoeff.Value = 0.2f;
+        staticFrictionSlider.SetValueWithoutNotify(0.2f);
         frictionVector.components.Value = Vector3.zero;
         frictionVector.Redraw();
+
+        kineticFrictionCoeff.Value = 0.2f;
+        kineticFrictionSlider.SetValueWithoutNotify(0.2f);
         
         // ============= Camera =============
         Vector3 cameraPos = currentAffordances.camera.position.ToVector3();

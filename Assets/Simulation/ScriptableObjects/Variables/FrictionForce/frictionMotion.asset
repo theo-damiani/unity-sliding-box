@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f18677b064579246933d6e05bcb0e45, type: 3}
   m_Name: frictionMotion
   m_EditorClassIdentifier: 
-  frictionMaxCoeff:
+  frictionStaticCoeff:
     UseConstant: 0
-    ConstantValue: 1
+    ConstantValue: 0
     Variable: {fileID: 11400000, guid: 8ea8bd7c406c7ed3ca193a4f36bbb96a, type: 2}
+  frictionKineticCoeff:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 502dc002f7d549378bb76f7ecae499cd, type: 2}
   objectMass:
     UseConstant: 1
     ConstantValue: 1
@@ -32,3 +36,7 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: {x: 0, y: 0, z: 0}
     Variable: {fileID: 11400000, guid: 6c3ca7da2c0c107638de5f27758b3601, type: 2}
+  currentFrictionCoeff:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 6e2cd20b281d9620eb33cc0a3044649d, type: 2}

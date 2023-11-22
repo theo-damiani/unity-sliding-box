@@ -5,11 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "frictionMotion", menuName="Motion / Friction Motion")]
 public class FrictionMotion : Motion
 {
-    [SerializeField] private FloatReference frictionMaxCoeff;
+    [SerializeField] private FloatReference frictionStaticCoeff;
+    [SerializeField] private FloatReference frictionKineticCoeff;
     [SerializeField] private FloatReference objectMass;
     [SerializeField] private Vector3Reference appliedForceOnObject;
     [SerializeField] private BoolReference appliedForceIsActive;
     [SerializeField] private Vector3Reference currentFriction;
+    [SerializeField] private BoolReference currentFrictionCoeff; // 0 for static, 1 for kinetic
     private Vector3 appliedForceNorm;
 
     public override void InitMotion(Rigidbody rigidbody)
@@ -18,18 +20,42 @@ public class FrictionMotion : Motion
     }
     public override void ApplyMotion(Rigidbody rigidbody)
     {
-        Vector3 frictionForce = frictionMaxCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
+        Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
         if (appliedForceIsActive.Value)
         {
-            if (frictionForce.sqrMagnitude >= appliedForceOnObject.Value.sqrMagnitude)
+            Vector3 staticFrictionForce = frictionStaticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
+            if (staticFrictionForce.sqrMagnitude >= appliedForceOnObject.Value.sqrMagnitude)
             {
-                rigidbody.AddForce(-appliedForceOnObject.Value*objectMass.Value, ForceMode.Force); // static friction
-                SetVectorRepresentation(-appliedForceOnObject.Value*objectMass.Value);
+                // // STATIC FRICTION
+                // rigidbody.AddForce(-appliedForceOnObject.Value*objectMass.Value, ForceMode.Force);
+                // SetVectorRepresentation(-appliedForceOnObject.Value*objectMass.Value);
+
+                if (rigidbody.velocity.sqrMagnitude <= 0.01)
+                {
+                    rigidbody.velocity = Vector3.zero;
+                }
+
+                if (rigidbody.velocity != Vector3.zero)
+                {
+                    // KINETIC FRICTION
+                    rigidbody.AddForce(kineticFrictionForce, ForceMode.Force);
+                    SetVectorRepresentation(kineticFrictionForce);
+                    SetFrictionFlag(true);
+                }
+                else
+                {
+                    // STATIC FRICTION
+                    rigidbody.AddForce(-appliedForceOnObject.Value*objectMass.Value, ForceMode.Force);
+                    SetVectorRepresentation(-appliedForceOnObject.Value*objectMass.Value);
+                    SetFrictionFlag(false);
+                }
             }
             else
             {
-                rigidbody.AddForce(frictionForce, ForceMode.Force); // kinetic friction
-                SetVectorRepresentation(frictionForce);
+                // KINETIC FRICTION
+                rigidbody.AddForce(kineticFrictionForce, ForceMode.Force);
+                SetVectorRepresentation(kineticFrictionForce);
+                SetFrictionFlag(true);
             }
         }
         else
@@ -42,11 +68,13 @@ public class FrictionMotion : Motion
             {
                 rigidbody.velocity = Vector3.zero;
                 SetVectorRepresentation(Vector3.zero);
+                SetFrictionFlag(false);
                 return;
             }
-            rigidbody.AddForce(frictionForce, ForceMode.Force); // kinetic friction
-
-            SetVectorRepresentation(frictionForce);
+            // KINETIC FRICTION
+            rigidbody.AddForce(kineticFrictionForce, ForceMode.Force);
+            SetVectorRepresentation(kineticFrictionForce);
+            SetFrictionFlag(true);
         }
     }
 
@@ -57,5 +85,14 @@ public class FrictionMotion : Motion
             return;
         }
         currentFriction.Value = newComponents;
+    }
+
+    public void SetFrictionFlag(bool newVal)
+    {
+        if (currentFrictionCoeff.Value == newVal)
+        {
+            return;
+        }
+        currentFrictionCoeff.Value = newVal;
     }
 }
