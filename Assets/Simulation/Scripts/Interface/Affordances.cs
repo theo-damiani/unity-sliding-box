@@ -5,16 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Affordances", menuName="Affordances")]
 public class Affordances : ScriptableObject
 {
-    public bool showPlayButton;
-    public bool showPauseButton;
+    public bool showPlayPauseButton;
     public bool showResetButton;
     public bool showTimeControl;
     public A_Camera camera;
     public bool showReferenceFrame;
     public A_PhysicalObject physicalObject;
     public A_Force push1Force;
-    public bool showAsteroidButton;
-    public float asteroidCollisionForce;
 }
 
 [Serializable]

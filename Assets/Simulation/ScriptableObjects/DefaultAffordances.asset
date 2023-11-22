@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ee2cadbf2b428168df77d674de7b76, type: 3}
   m_Name: DefaultAffordances
   m_EditorClassIdentifier: 
-  showPlayButton: 1
-  showPauseButton: 1
+  showPlayPauseButton: 1
   showResetButton: 1
   showTimeControl: 1
   camera:
@@ -55,6 +54,4 @@ MonoBehaviour:
     showVector: 1
     showLabel: 0
     showEquation: 0
-    initialMagnitude: 3
-  showAsteroidButton: 0
-  asteroidCollisionForce: 0
+    initialMagnitude: 1

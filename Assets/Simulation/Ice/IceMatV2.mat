@@ -102,16 +102,16 @@ Material:
     - _EdgesOpacity: 1.75
     - _EnvironmentReflections: 1
     - _FresnelPower: 0.8
-    - _FrostPower: 0.8
+    - _FrostPower: 0.69
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
     - _Normals: 0.96
     - _OcclusionStrength: 1
-    - _OpacityHardness: 0.7
-    - _OpacityPower: 7
-    - _OpacityRadius: 0.5
+    - _OpacityHardness: 1
+    - _OpacityPower: 10
+    - _OpacityRadius: 1
     - _Parallax: 0.005
     - _PowerOpcatiy: 10
     - _QueueControl: 0
@@ -135,7 +135,7 @@ Material:
     - _MainColor: {r: 0.14940873, g: 0.39801243, b: 0.6279039, a: 0.8}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 3, g: 3, b: 0, a: 0}
-    - _UV: {r: -14.310006, g: 0, b: 0, a: 0}
+    - _UV: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1446100501086654768
 MonoBehaviour:

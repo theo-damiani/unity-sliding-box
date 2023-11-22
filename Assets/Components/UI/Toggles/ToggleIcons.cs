@@ -19,8 +19,11 @@ public class ToggleIcons : MonoBehaviour
     public void SetToTrue()
     {
         isTrue = true;
-        if (icon) icon.sprite = trueIcon;
-        icon.color = trueColor;
+        if (icon)
+        {
+            icon.sprite = trueIcon;
+            icon.color = trueColor;
+        }
 
         OnTrueEventList?.Invoke();
     }
@@ -28,7 +31,11 @@ public class ToggleIcons : MonoBehaviour
     public void SetToFalse()
     {
         isTrue = false;
-        if (icon) icon.sprite = falseIcon;
+        if (icon)
+        {
+            icon.sprite = falseIcon;
+            icon.color = falseColor;
+        }
 
         OnFalseEventList?.Invoke();
     }
@@ -38,13 +45,19 @@ public class ToggleIcons : MonoBehaviour
         this.isTrue = isTrue;
         if (isTrue)
         {
-            if (icon) icon.sprite = trueIcon;
-            icon.color = trueColor;
+            if (icon) 
+            {
+                icon.sprite = trueIcon;
+                icon.color = trueColor;
+            }
         }
         else
         {
-            if (icon) icon.sprite = falseIcon;
-            icon.color = falseColor;
+            if (icon)
+            {
+                icon.sprite = falseIcon;
+                icon.color = falseColor;
+            }
         }
     }
 

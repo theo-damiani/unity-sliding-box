@@ -24,7 +24,7 @@ public class FrictionMotion : Motion
             if (frictionForce.sqrMagnitude >= appliedForceOnObject.Value.sqrMagnitude)
             {
                 rigidbody.AddForce(-appliedForceOnObject.Value*objectMass.Value, ForceMode.Force); // static friction
-                rigidbody.velocity = Vector3.zero;
+                //rigidbody.velocity = Vector3.zero;
                 SetVectorRepresentation(-appliedForceOnObject.Value*objectMass.Value);
             }
             else

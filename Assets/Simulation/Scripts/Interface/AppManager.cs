@@ -48,6 +48,11 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private Vector frictionVector;
     [SerializeField] private Slider frictionSlider;
 
+    [Header("Timer")]
+    [SerializeField] private RectTransform timerToggle;
+
+
+
     public override void Awake()
     {
         base.Awake();
@@ -71,7 +76,7 @@ public class AppManager : Singleton<AppManager>
     public void ResetApp()
     {
         // ============= Main control =============
-        playButton.gameObject.SetActive(currentAffordances.showPlayButton);
+        playButton.gameObject.SetActive(currentAffordances.showPlayPauseButton);
         resetButton.gameObject.SetActive(currentAffordances.showResetButton);
         
         playButton.GetComponent<PlayButton>().PlayWithoutRaising();
@@ -92,10 +97,10 @@ public class AppManager : Singleton<AppManager>
         push1IsActive.Value = currentAffordances.push1Force.isActive;
         push1ShowVector.Value = currentAffordances.push1Force.showVector;
 
-        push1IsConstant.Value = currentAffordances.push1Force.isConstant;
-        push1ConstantBtn.gameObject.SetActive(currentAffordances.push1Force.isConfigurable);
-        push1ConstantBtn.GetComponent<Toggle>().SetIsOnWithoutNotify(currentAffordances.push1Force.isConstant);
-        push1ConstantBtn.GetComponentInChildren<TextMeshProUGUI>().SetText("Is constant");
+        // push1IsConstant.Value = currentAffordances.push1Force.isConstant;
+        // push1ConstantBtn.gameObject.SetActive(currentAffordances.push1Force.isConfigurable);
+        // push1ConstantBtn.GetComponent<Toggle>().SetIsOnWithoutNotify(currentAffordances.push1Force.isConstant);
+        // push1ConstantBtn.GetComponentInChildren<TextMeshProUGUI>().SetText("Is constant");
         if (currentAffordances.push1Force.isConstant)
         {
             push1Force.Value = Vector3.right * currentAffordances.push1Force.initialMagnitude;
@@ -104,7 +109,7 @@ public class AppManager : Singleton<AppManager>
         {
             push1Force.Value = Vector3.right;
         }
-        push1Force.Value = Quaternion.Euler(currentAffordances.physicalObject.initialRotation.ToVector3()) * push1Force.Value;
+        //push1Force.Value = Quaternion.Euler(currentAffordances.physicalObject.initialRotation.ToVector3()) * push1Force.Value;
 
         push1ShowEquation.Value = currentAffordances.push1Force.showEquation;
         push1ShowLabel.SetActive(currentAffordances.push1Force.showLabel);
@@ -143,5 +148,9 @@ public class AppManager : Singleton<AppManager>
         showPath.Value = currentAffordances.physicalObject.showTrace;
         showPathToggle.gameObject.SetActive(currentAffordances.physicalObject.showTraceIsInteractive);
         showPathToggle.GetComponent<ToggleStartActivation>().SetToggleVisibility(currentAffordances.physicalObject.showTrace);
+
+        // ============= Timer Toggle =============
+        timerToggle.gameObject.SetActive(true);
+        timerToggle.GetComponent<ToggleIcons>().SetToFalse();
     }
 }
