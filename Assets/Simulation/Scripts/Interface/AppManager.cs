@@ -51,6 +51,9 @@ public class AppManager : Singleton<AppManager>
     [Header("Timer")]
     [SerializeField] private RectTransform timerToggle;
 
+    [Header("Infinite distance measure")]
+    [SerializeField] private InfiniteTimeLine infiniteTimeLine;
+
 
 
     public override void Awake()
@@ -152,5 +155,6 @@ public class AppManager : Singleton<AppManager>
         // ============= Timer Toggle =============
         timerToggle.gameObject.SetActive(true);
         timerToggle.GetComponent<ToggleIcons>().SetToFalse();
+        infiniteTimeLine.InitTimeLine();
     }
 }

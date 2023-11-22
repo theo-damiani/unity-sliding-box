@@ -43,7 +43,7 @@ public class InfiniteTimeLine : MonoBehaviour
         InitTimeLine();
     }
 
-    void InitTimeLine()
+    public void InitTimeLine()
     {
         // Init line
         GameObject lineGo = Instantiate(linePrefab, transform);
