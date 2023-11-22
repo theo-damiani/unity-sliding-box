@@ -45,7 +45,7 @@ public class FrictionObject : MonoBehaviour
 
         // parentRigidbody = GetComponentInParent<Rigidbody>();
         parentRigidbody = targetSpeed;
-        transform.position = targetPos.position + Vector3.down*0.5f;
+        transform.position = targetPos.position + Vector3.down*targetPos.localScale.x;
 
         uvOffset = material.GetVector("_UV");
 

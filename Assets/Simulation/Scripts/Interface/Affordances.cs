@@ -11,7 +11,7 @@ public class Affordances : ScriptableObject
     public A_Camera camera;
     public bool showReferenceFrame;
     public A_PhysicalObject physicalObject;
-    public A_Force push1Force;
+    public A_Force pushForce;
 }
 
 [Serializable]
@@ -45,7 +45,6 @@ public class A_Force
 {
     public bool isActive;
     public bool isInteractive;
-    public bool isConstant;
     public bool isConfigurable;
     public bool showVector;
     public bool showLabel;

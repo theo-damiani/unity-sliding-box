@@ -32,16 +32,13 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private DraggableVector boxVelocityVector;
 
     [Header("Force Pushing Object 1")]
-    [SerializeField] private BoolVariable push1IsActive;
-    [SerializeField] private BoolVariable push1IsInteractive;
-    [SerializeField] private BoolVariable push1IsConstant;
-    [SerializeField] private Vector3Variable push1Force;
-    [SerializeField] private BoolVariable push1ShowVector;
-    [SerializeField] private GameObject push1ShowLabel;
-    [SerializeField] private BoolVariable push1ShowEquation;
-    [SerializeField] private RectTransform push1ConfigBtn;
-    [SerializeField] private RectTransform push1ConstantBtn;
-    [SerializeField] private DraggableVector push1Vector;
+    [SerializeField] private BoolVariable pushIsActive;
+    [SerializeField] private BoolVariable pushIsInteractive;
+    [SerializeField] private Vector3Variable pushForce;
+    [SerializeField] private BoolVariable pushShowVector;
+    [SerializeField] private GameObject pushShowLabel;
+    [SerializeField] private BoolVariable pushShowEquation;
+    [SerializeField] private DraggableVector pushVector;
 
     [Header("Friction 1")]
     [SerializeField] private FloatVariable maxFrictionCoeff;
@@ -84,7 +81,7 @@ public class AppManager : Singleton<AppManager>
         
         playButton.GetComponent<PlayButton>().PlayWithoutRaising();
 
-        // ============= Box 1 =============
+        // ============= Box =============
         // need to set mainObject
         mainObject.localPosition = currentAffordances.physicalObject.initialPosition.ToVector3();
 
@@ -96,33 +93,19 @@ public class AppManager : Singleton<AppManager>
         mainObject.GetComponent<Rigidbody>().isKinematic = false;
         mainObject.GetComponent<Rigidbody>().velocity = boxVelocity.Value;
 
-        // ============= Push 1 =============
-        push1IsActive.Value = currentAffordances.push1Force.isActive;
-        push1ShowVector.Value = currentAffordances.push1Force.showVector;
+        // ============= Push =============
+        pushIsActive.Value = currentAffordances.pushForce.isActive;
+        pushShowVector.Value = currentAffordances.pushForce.showVector;
 
-        // push1IsConstant.Value = currentAffordances.push1Force.isConstant;
-        // push1ConstantBtn.gameObject.SetActive(currentAffordances.push1Force.isConfigurable);
-        // push1ConstantBtn.GetComponent<Toggle>().SetIsOnWithoutNotify(currentAffordances.push1Force.isConstant);
-        // push1ConstantBtn.GetComponentInChildren<TextMeshProUGUI>().SetText("Is constant");
-        if (currentAffordances.push1Force.isConstant)
-        {
-            push1Force.Value = Vector3.right * currentAffordances.push1Force.initialMagnitude;
-        }
-        else
-        {
-            push1Force.Value = Vector3.right;
-        }
-        //push1Force.Value = Quaternion.Euler(currentAffordances.physicalObject.initialRotation.ToVector3()) * push1Force.Value;
+        pushForce.Value = Vector3.right * currentAffordances.pushForce.initialMagnitude;
+        //pushForce.Value = Quaternion.Euler(currentAffordances.physicalObject.initialRotation.ToVector3()) * pushForce.Value;
 
-        push1ShowEquation.Value = currentAffordances.push1Force.showEquation;
-        push1ShowLabel.SetActive(currentAffordances.push1Force.showLabel);
-        push1IsInteractive.Value = currentAffordances.push1Force.isInteractive;
+        pushShowEquation.Value = currentAffordances.pushForce.showEquation;
+        pushShowLabel.SetActive(currentAffordances.pushForce.showLabel);
+        pushIsInteractive.Value = currentAffordances.pushForce.isInteractive;
+        pushVector.SetInteractable(currentAffordances.pushForce.isConfigurable);
 
-        push1ConfigBtn.gameObject.SetActive(currentAffordances.push1Force.isConfigurable);
-        push1ConfigBtn.GetComponent<ToggleIcons>().SetWithoutRaising(false);
-        push1Vector.SetInteractable(currentAffordances.push1Force.isConfigurable);
-
-        // ============= Friction 1 =============
+        // ============= Friction =============
 
         // TODO:
         maxFrictionCoeff.Value = 0.2f;

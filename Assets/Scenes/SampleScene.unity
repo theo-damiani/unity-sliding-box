@@ -1822,16 +1822,13 @@ MonoBehaviour:
   showPath: {fileID: 11400000, guid: d8038fd055ae127609893aed7bd94c12, type: 2}
   boxVelocity: {fileID: 11400000, guid: c5646fd991a27f9eb89a356d70ab2683, type: 2}
   boxVelocityVector: {fileID: 4608779177328071455}
-  push1IsActive: {fileID: 11400000, guid: cb1e70f530fc5d438b6408c0f21fe751, type: 2}
-  push1IsInteractive: {fileID: 11400000, guid: 11b906510c4a6ddf4978caa8f99f42b0, type: 2}
-  push1IsConstant: {fileID: 11400000, guid: 6084d778fd72420da91ca34751206ba3, type: 2}
-  push1Force: {fileID: 11400000, guid: 1b516b265880aeaeaa7d69b05dac0fbf, type: 2}
-  push1ShowVector: {fileID: 11400000, guid: 145466eb5493d31c38dbe99300037a97, type: 2}
-  push1ShowLabel: {fileID: 1811955319}
-  push1ShowEquation: {fileID: 11400000, guid: b85f4cd8b24cc1d1e9353dea144d8c1d, type: 2}
-  push1ConfigBtn: {fileID: 8327211740879645234}
-  push1ConstantBtn: {fileID: 0}
-  push1Vector: {fileID: 4608779177855009354}
+  pushIsActive: {fileID: 11400000, guid: cb1e70f530fc5d438b6408c0f21fe751, type: 2}
+  pushIsInteractive: {fileID: 11400000, guid: 11b906510c4a6ddf4978caa8f99f42b0, type: 2}
+  pushForce: {fileID: 11400000, guid: 1b516b265880aeaeaa7d69b05dac0fbf, type: 2}
+  pushShowVector: {fileID: 11400000, guid: 145466eb5493d31c38dbe99300037a97, type: 2}
+  pushShowLabel: {fileID: 1811955319}
+  pushShowEquation: {fileID: 11400000, guid: b85f4cd8b24cc1d1e9353dea144d8c1d, type: 2}
+  pushVector: {fileID: 4608779177855009354}
   maxFrictionCoeff: {fileID: 11400000, guid: 8ea8bd7c406c7ed3ca193a4f36bbb96a, type: 2}
   frictionVector: {fileID: 587971314}
   frictionSlider: {fileID: 5536735365069140450}
@@ -13170,7 +13167,7 @@ MonoBehaviour:
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: 11b906510c4a6ddf4978caa8f99f42b0, type: 2}
   listGameObject:
-  - {fileID: 595982323230301743}
+  - {fileID: 1014834921}
 --- !u!1 &1014834921
 GameObject:
   m_ObjectHideFlags: 0
