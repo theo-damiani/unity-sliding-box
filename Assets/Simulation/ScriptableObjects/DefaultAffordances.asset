@@ -46,10 +46,9 @@ MonoBehaviour:
     velocityVectorIsInteractive: 1
     showVelocityLabel: 0
     showVelocityEquation: 0
-  push1Force:
+  pushForce:
     isActive: 0
     isInteractive: 1
-    isConstant: 1
     isConfigurable: 1
     showVector: 1
     showLabel: 0
