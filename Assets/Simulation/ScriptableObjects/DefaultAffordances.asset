@@ -18,8 +18,8 @@ MonoBehaviour:
   camera:
     position:
       X: 0
-      Y: 6
-      Z: -5
+      Y: 6.5
+      Z: -8
     showCameraControl: 1
     isLockedOnObject: 1
   showReferenceFrame: 0

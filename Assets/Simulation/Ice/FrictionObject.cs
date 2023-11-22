@@ -5,7 +5,6 @@ using UnityEngine;
 public class FrictionObject : MonoBehaviour
 {
     [SerializeField] private Material material;
-    [SerializeField] private float scaleFactor;
     [SerializeField] private FloatReference drag;
 
     [Header("Position configuration")]
@@ -35,6 +34,9 @@ public class FrictionObject : MonoBehaviour
     [SerializeField] AnimationCurve curve;
 
     private Rigidbody parentRigidbody;
+    private Vector2 uvOffset = Vector2.zero;
+    private float rendererLength;
+    private float uVcount;
 
     void Start()
     {
@@ -44,15 +46,22 @@ public class FrictionObject : MonoBehaviour
         // parentRigidbody = GetComponentInParent<Rigidbody>();
         parentRigidbody = targetSpeed;
         transform.position = targetPos.position + Vector3.down*0.5f;
+
+        uvOffset = material.GetVector("_UV");
+
+        Renderer renderer = GetComponent<Renderer>();
+        rendererLength = renderer.bounds.size.x;
+        uVcount = material.GetVector("_Tiling").x;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (mainCamera.isLockedOnTarget)
         {
             transform.position = targetPos.position + Vector3.down*0.5f;
-            Vector2 oldUV = material.GetVector("_UV");
-            material.SetVector("_UV", oldUV + new Vector2(-parentRigidbody.velocity.x*Time.deltaTime*scaleFactor, 0));
+            float speedUV = parentRigidbody.velocity.x  * uVcount / rendererLength;
+            uvOffset += new Vector2(-speedUV*Time.fixedDeltaTime, 0);
+            material.SetVector("_UV", uvOffset);
         }
     }
 
