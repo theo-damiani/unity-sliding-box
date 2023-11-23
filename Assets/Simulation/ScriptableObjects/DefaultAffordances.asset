@@ -20,14 +20,14 @@ MonoBehaviour:
       X: 0
       Y: 6.5
       Z: -8
+    rotation:
+      X: 35
+      Y: 0
+      Z: 0
     showCameraControl: 1
     isLockedOnObject: 1
   showReferenceFrame: 0
   physicalObject:
-    isInteractiveUp: 0
-    isInteractiveDown: 0
-    isInteractiveRight: 0
-    isInteractiveLeft: 0
     showTrace: 1
     showTraceIsInteractive: 1
     initialPosition:

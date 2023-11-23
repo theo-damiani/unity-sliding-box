@@ -13,8 +13,8 @@ public class FrictionMotion : Motion
     [SerializeField] private BoolReference appliedForceIsActive;
     [SerializeField] private Vector3Reference currentFriction;
     [SerializeField] private BoolReference currentFrictionCoeff; // 0 for static, 1 for kinetic
+    [SerializeField] private Vector3Reference currentMaxFriction;
     private Vector3 appliedForceNorm;
-    private float velocityPrecisionCheck = 0.1f;
 
     public override void InitMotion(Rigidbody rigidbody)
     {
@@ -22,107 +22,50 @@ public class FrictionMotion : Motion
     }
     public override void ApplyMotion(Rigidbody rigidbody)
     {
-        // if (Mathf.Approximately(rigidbody.velocity.sqrMagnitude, 0))
-        // {
-        //     if (appliedForceIsActive.Value)
-        //     {
-        //         Vector3 staticFrictionForce = frictionStaticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
-
-        //         if (staticFrictionForce.sqrMagnitude >= appliedForceOnObject.Value.sqrMagnitude)
-        //         {
-        //             // STATIC FRICTION
-        //             rigidbody.AddForce(-appliedForceOnObject.Value*objectMass.Value, ForceMode.Force);
-        //             SetVectorRepresentation(-appliedForceOnObject.Value*objectMass.Value);
-        //         }
-        //         // else
-        //         // {
-        //         //     Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
-        //         //     // KINETIC FRICTION
-        //         //     rigidbody.AddForce(kineticFrictionForce, ForceMode.Force);
-        //         //     SetVectorRepresentation(kineticFrictionForce);
-        //         //     SetFrictionFlag(true);
-        //         // }
-        //     }
-        // }
-        // else
-        // {
-        //     if (rigidbody.velocity.sqrMagnitude <= 0.01)
-        //     {
-        //         rigidbody.velocity = Vector3.zero;
-        //         SetVectorRepresentation(Vector3.zero);
-        //         SetFrictionFlag(false);
-        //         return;
-        //     }
-        //     Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
-        //     //Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * rigidbody.velocity.normalized;
-        //     // KINETIC FRICTION
-        //     rigidbody.AddForce(kineticFrictionForce, ForceMode.Force);
-        //     SetVectorRepresentation(kineticFrictionForce);
-        //     SetFrictionFlag(true);
-        // }
-
-        // Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
-        Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * rigidbody.velocity.normalized;
-        if (appliedForceIsActive.Value)
+        if (rigidbody.velocity.x < 0)
+        {
+            rigidbody.velocity = Vector3.zero;
+        }
+        if (rigidbody.velocity.sqrMagnitude == 0f)
         {
             Vector3 staticFrictionForce = frictionStaticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
-            if (staticFrictionForce.sqrMagnitude >= appliedForceOnObject.Value.sqrMagnitude)
+            if (appliedForceIsActive.Value)
             {
-                if (rigidbody.velocity.sqrMagnitude <= velocityPrecisionCheck)
-                {
-                    rigidbody.velocity = Vector3.zero;
-                }
-
-                if (rigidbody.velocity != Vector3.zero)
-                {
-                    // KINETIC FRICTION
-                    rigidbody.AddForce(kineticFrictionForce, ForceMode.Force);
-                    SetVectorRepresentation(kineticFrictionForce);
-                    SetFrictionFlag(true);
-                }
-                else
+                if (appliedForceOnObject.Value.sqrMagnitude <= staticFrictionForce.sqrMagnitude)
                 {
                     // STATIC FRICTION
                     rigidbody.AddForce(-appliedForceOnObject.Value*objectMass.Value, ForceMode.Force);
-                    SetVectorRepresentation(-appliedForceOnObject.Value*objectMass.Value);
+                    SetVectorRepresentation(currentFriction, -appliedForceOnObject.Value*objectMass.Value);
+                    SetVectorRepresentation(currentMaxFriction, staticFrictionForce);
                     SetFrictionFlag(false);
                 }
             }
             else
             {
-                // KINETIC FRICTION
-                rigidbody.AddForce(kineticFrictionForce, ForceMode.Force);
-                SetVectorRepresentation(kineticFrictionForce);
-                SetFrictionFlag(true);
+                SetVectorRepresentation(currentFriction, Vector3.zero);
+                SetVectorRepresentation(currentMaxFriction, staticFrictionForce);
+                SetFrictionFlag(false);
             }
         }
         else
         {
-            if (Mathf.Approximately(rigidbody.velocity.sqrMagnitude, 0))
-            {
-                return;
-            }
-            if (rigidbody.velocity.sqrMagnitude <= velocityPrecisionCheck)
-            {
-                rigidbody.velocity = Vector3.zero;
-                SetVectorRepresentation(Vector3.zero);
-                SetFrictionFlag(false);
-                return;
-            }
+            Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
+            //Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * rigidbody.velocity.normalized;
             // KINETIC FRICTION
             rigidbody.AddForce(kineticFrictionForce, ForceMode.Force);
-            SetVectorRepresentation(kineticFrictionForce);
+            SetVectorRepresentation(currentFriction, kineticFrictionForce);
+            SetVectorRepresentation(currentMaxFriction, kineticFrictionForce);
             SetFrictionFlag(true);
         }
     }
 
-    public void SetVectorRepresentation(Vector3 newComponents)
+    public void SetVectorRepresentation(Vector3Reference vectorRef, Vector3 newComponents)
     {
-        if (currentFriction.Value == newComponents)
+        if (vectorRef.Value == newComponents)
         {
             return;
         }
-        currentFriction.Value = newComponents;
+        vectorRef.Value = newComponents;
     }
 
     public void SetFrictionFlag(bool newVal)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -58,6 +59,18 @@ public class ToggleIcons : MonoBehaviour
                 icon.sprite = falseIcon;
                 icon.color = falseColor;
             }
+        }
+    }
+
+    public void SetToggle(bool isTrue)
+    {
+        if (isTrue)
+        {
+            SetToTrue();
+        }
+        else
+        {
+            SetToFalse();
         }
     }
 

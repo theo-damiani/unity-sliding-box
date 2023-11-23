@@ -30,6 +30,7 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private BoolVariable showPath;
     [SerializeField] private Vector3Variable boxVelocity;
     [SerializeField] private DraggableVector boxVelocityVector;
+    [SerializeField] private GameObject boxVelocityLabel;
 
     [Header("Force Pushing Object 1")]
     [SerializeField] private BoolVariable pushIsActive;
@@ -39,6 +40,7 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private GameObject pushShowLabel;
     [SerializeField] private BoolVariable pushShowEquation;
     [SerializeField] private DraggableVector pushVector;
+    [SerializeField] private ToggleIcons pushForceToggle;
 
     [Header("Friction 1")]
     [SerializeField] private FloatVariable staticFrictionCoeff;
@@ -86,11 +88,16 @@ public class AppManager : Singleton<AppManager>
         // ============= Box =============
         // need to set mainObject
         mainObject.localPosition = currentAffordances.physicalObject.initialPosition.ToVector3();
+        mainObject.Find("Mesh").transform.localRotation = Quaternion.Euler(currentAffordances.physicalObject.initialRotation.ToVector3());
 
+        Vector3 velocity = currentAffordances.physicalObject.initialVelocity.ToVector3();
+        velocity.y = 0;
+        velocity.z = 0;
         boxVelocity.Value = currentAffordances.physicalObject.initialVelocity.ToVector3();
         boxVelocityVector.gameObject.SetActive(currentAffordances.physicalObject.showVelocityVector);
         boxVelocityVector.SetInteractable(currentAffordances.physicalObject.velocityVectorIsInteractive);
         boxVelocityVector.Redraw();
+        boxVelocityLabel.SetActive(currentAffordances.physicalObject.showVelocityLabel);
 
         mainObject.GetComponent<Rigidbody>().isKinematic = false;
         mainObject.GetComponent<Rigidbody>().velocity = boxVelocity.Value;
@@ -106,6 +113,8 @@ public class AppManager : Singleton<AppManager>
         pushShowLabel.SetActive(currentAffordances.pushForce.showLabel);
         pushIsInteractive.Value = currentAffordances.pushForce.isInteractive;
         pushVector.SetInteractable(currentAffordances.pushForce.isConfigurable);
+
+        pushForceToggle.SetToggle(currentAffordances.pushForce.isActive);
 
         // ============= Friction =============
 
