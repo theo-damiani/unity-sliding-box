@@ -7,10 +7,13 @@ using UnityEngine.UI;
 public class ToggleIcons : MonoBehaviour
 {
     [SerializeField] private Image icon;
+    [SerializeField] private Image background;
     [SerializeField] private Sprite trueIcon;
     [SerializeField] private Color trueColor;
+    [SerializeField] private Color trueBgColor;
     [SerializeField] private Sprite falseIcon;
     [SerializeField] private Color falseColor;
+    [SerializeField] private Color falseBgColor;
 
     [SerializeField] private UnityEvent OnTrueEventList;
     [SerializeField] private UnityEvent OnFalseEventList;
@@ -26,6 +29,11 @@ public class ToggleIcons : MonoBehaviour
             icon.color = trueColor;
         }
 
+        if (background)
+        {
+            background.color = trueBgColor;
+        }
+
         OnTrueEventList?.Invoke();
     }
 
@@ -36,6 +44,11 @@ public class ToggleIcons : MonoBehaviour
         {
             icon.sprite = falseIcon;
             icon.color = falseColor;
+        }
+
+        if (background)
+        {
+            background.color = falseBgColor;
         }
 
         OnFalseEventList?.Invoke();
@@ -51,6 +64,11 @@ public class ToggleIcons : MonoBehaviour
                 icon.sprite = trueIcon;
                 icon.color = trueColor;
             }
+
+            if (background)
+            {
+                background.color = trueBgColor;
+            }
         }
         else
         {
@@ -58,6 +76,11 @@ public class ToggleIcons : MonoBehaviour
             {
                 icon.sprite = falseIcon;
                 icon.color = falseColor;
+            }
+
+            if (background)
+            {
+                background.color = falseBgColor;
             }
         }
     }

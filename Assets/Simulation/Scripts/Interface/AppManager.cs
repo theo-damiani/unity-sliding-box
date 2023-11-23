@@ -149,7 +149,7 @@ public class AppManager : Singleton<AppManager>
         // ============= Path Renderer =============
         showPath.Value = currentAffordances.physicalObject.showTrace;
         showPathToggle.gameObject.SetActive(currentAffordances.physicalObject.showTraceIsInteractive);
-        showPathToggle.GetComponent<ToggleStartActivation>().SetToggleVisibility(currentAffordances.physicalObject.showTrace);
+        showPathToggle.GetComponent<ToggleIcons>().SetWithoutRaising(currentAffordances.physicalObject.showTrace);
 
         // ============= Timer Toggle =============
         timerToggle.gameObject.SetActive(true);
