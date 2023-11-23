@@ -26,6 +26,11 @@ public class DraggableVector : Vector
     public bool useStickyDirections;
     public List<Vector3> stickyDirections;
 
+    [Header("Head Sticky Point")]
+    public BoolReference useStickyPointHead;
+    public Vector3Reference stickyPointHead;
+    public float stickyPointRadiusHead = 0.5f;
+
     [Header("Magnitude")]
     public bool clampMagnitude;
     public float minMagnitude = 0.2f;
@@ -167,9 +172,18 @@ public class DraggableVector : Vector
                     // Update components
                     Vector3 newComponents = hitPoint - transform.position;
 
+
                     if (VectorIsOnlyScalable)
                     {
                         newComponents = Vector3.Project(newComponents, DragDirectionIfOnlyScalable.Value);
+                    }
+
+                    if (useStickyPointHead.Value)
+                    {
+                        if (Vector3.Distance(newComponents, -stickyPointHead.Value) <= stickyPointRadiusHead)
+                        {
+                            newComponents = -stickyPointHead.Value;
+                        }
                     }
 
                     // Snap the direction

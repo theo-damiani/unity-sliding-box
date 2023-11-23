@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "frictionMotion", menuName="Motion / Friction Motion")]
@@ -13,6 +14,7 @@ public class FrictionMotion : Motion
     [SerializeField] private Vector3Reference currentFriction;
     [SerializeField] private BoolReference currentFrictionCoeff; // 0 for static, 1 for kinetic
     private Vector3 appliedForceNorm;
+    private float velocityPrecisionCheck = 0.1f;
 
     public override void InitMotion(Rigidbody rigidbody)
     {
@@ -20,17 +22,53 @@ public class FrictionMotion : Motion
     }
     public override void ApplyMotion(Rigidbody rigidbody)
     {
-        Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
+        // if (Mathf.Approximately(rigidbody.velocity.sqrMagnitude, 0))
+        // {
+        //     if (appliedForceIsActive.Value)
+        //     {
+        //         Vector3 staticFrictionForce = frictionStaticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
+
+        //         if (staticFrictionForce.sqrMagnitude >= appliedForceOnObject.Value.sqrMagnitude)
+        //         {
+        //             // STATIC FRICTION
+        //             rigidbody.AddForce(-appliedForceOnObject.Value*objectMass.Value, ForceMode.Force);
+        //             SetVectorRepresentation(-appliedForceOnObject.Value*objectMass.Value);
+        //         }
+        //         // else
+        //         // {
+        //         //     Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
+        //         //     // KINETIC FRICTION
+        //         //     rigidbody.AddForce(kineticFrictionForce, ForceMode.Force);
+        //         //     SetVectorRepresentation(kineticFrictionForce);
+        //         //     SetFrictionFlag(true);
+        //         // }
+        //     }
+        // }
+        // else
+        // {
+        //     if (rigidbody.velocity.sqrMagnitude <= 0.01)
+        //     {
+        //         rigidbody.velocity = Vector3.zero;
+        //         SetVectorRepresentation(Vector3.zero);
+        //         SetFrictionFlag(false);
+        //         return;
+        //     }
+        //     Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
+        //     //Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * rigidbody.velocity.normalized;
+        //     // KINETIC FRICTION
+        //     rigidbody.AddForce(kineticFrictionForce, ForceMode.Force);
+        //     SetVectorRepresentation(kineticFrictionForce);
+        //     SetFrictionFlag(true);
+        // }
+
+        // Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
+        Vector3 kineticFrictionForce = frictionKineticCoeff.Value * objectMass.Value * Physics.gravity.y * rigidbody.velocity.normalized;
         if (appliedForceIsActive.Value)
         {
             Vector3 staticFrictionForce = frictionStaticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
             if (staticFrictionForce.sqrMagnitude >= appliedForceOnObject.Value.sqrMagnitude)
             {
-                // // STATIC FRICTION
-                // rigidbody.AddForce(-appliedForceOnObject.Value*objectMass.Value, ForceMode.Force);
-                // SetVectorRepresentation(-appliedForceOnObject.Value*objectMass.Value);
-
-                if (rigidbody.velocity.sqrMagnitude <= 0.01)
+                if (rigidbody.velocity.sqrMagnitude <= velocityPrecisionCheck)
                 {
                     rigidbody.velocity = Vector3.zero;
                 }
@@ -64,7 +102,7 @@ public class FrictionMotion : Motion
             {
                 return;
             }
-            if (rigidbody.velocity.sqrMagnitude <= 0.01)
+            if (rigidbody.velocity.sqrMagnitude <= velocityPrecisionCheck)
             {
                 rigidbody.velocity = Vector3.zero;
                 SetVectorRepresentation(Vector3.zero);
