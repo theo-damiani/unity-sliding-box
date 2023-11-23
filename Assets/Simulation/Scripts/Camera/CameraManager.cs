@@ -36,11 +36,11 @@ public class CameraManager : MonoBehaviour
         uiSlider.maxValue = GetSliderMax();
 
         // Set initial camera pos
-        gameObject.transform.localPosition = target.localPosition + initPos;
+        transform.localPosition = initPos;
         previousTargetPos = target.localPosition;
         isLockedOnTarget = isLocked;
         // Check if initial pos is in bounds
-        initOffsetToTarget = initPos;
+        initOffsetToTarget = initPos - previousTargetPos;
         float initOffsetClamped = Mathf.Clamp(initOffsetToTarget.magnitude, minDistanceToObject, GetSliderMax());
         initOffsetToTarget = initOffsetToTarget.normalized*initOffsetClamped;
 
@@ -48,7 +48,7 @@ public class CameraManager : MonoBehaviour
         minDistanceToTarget = (initPos - target.localPosition).normalized * minDistanceToObject;
         uiSlider.SetValueWithoutNotify(CameraToSlider(initOffsetToTarget.magnitude));
         zoomDirScaled = minDistanceToTarget * initOffsetToTarget.magnitude;
-    
+
         zoomSlider = uiSlider;
     }
 

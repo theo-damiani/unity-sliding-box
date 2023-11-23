@@ -17,7 +17,8 @@ public class Affordances : ScriptableObject
 [Serializable]
 public class A_Camera
 {
-    public A_Vector3 position;
+    public A_Vector3 position; 
+    public A_Vector3 rotation; // in degrees!
     public bool showCameraControl;
     public bool isLockedOnObject;
 }
@@ -25,10 +26,6 @@ public class A_Camera
 [Serializable]
 public class A_PhysicalObject
 {
-    public bool isInteractiveUp;
-    public bool isInteractiveDown;
-    public bool isInteractiveRight;
-    public bool isInteractiveLeft;
     public bool showTrace;
     public bool showTraceIsInteractive;
     public A_Vector3 initialPosition;

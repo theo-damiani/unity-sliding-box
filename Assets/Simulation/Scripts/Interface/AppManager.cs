@@ -133,6 +133,8 @@ public class AppManager : Singleton<AppManager>
             zoomSlider
         );
 
+        mainCamera.transform.localRotation = Quaternion.Euler(currentAffordances.camera.rotation.ToVector3());
+
         cameraControls.gameObject.SetActive(currentAffordances.camera.showCameraControl);
 
         // ============= Path Renderer =============
