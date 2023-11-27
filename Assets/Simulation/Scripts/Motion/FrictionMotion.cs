@@ -28,7 +28,8 @@ public class FrictionMotion : Motion
         {
             if (Sign(rigidbody.velocity.x) != previousVelocitySign)
             {
-                rigidbody.velocity = Vector3.zero;
+                if (!rigidbody.isKinematic)
+                    rigidbody.velocity = Vector3.zero;
             }
         }
 
