@@ -180,9 +180,9 @@ public class DraggableVector : Vector
 
                     if (useStickyPointHead.Value)
                     {
-                        if (Vector3.Distance(newComponents, -stickyPointHead.Value) <= stickyPointRadiusHead)
+                        if (Vector3.Distance(newComponents, stickyPointHead.Value) <= stickyPointRadiusHead)
                         {
-                            newComponents = -stickyPointHead.Value;
+                            newComponents = stickyPointHead.Value;
                         }
                     }
 

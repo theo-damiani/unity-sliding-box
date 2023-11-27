@@ -13,7 +13,7 @@ public class FrictionMotion : Motion
     [SerializeField] private BoolReference appliedForceIsActive;
     [SerializeField] private Vector3Reference currentFriction;
     [SerializeField] private BoolReference currentFrictionCoeff; // 0 for static, 1 for kinetic
-    [SerializeField] private Vector3Reference currentMaxFriction;
+    [SerializeField] private Vector3Reference currentMaxStaticForce;
     private Vector3 appliedForceNorm;
     private float previousVelocitySign;
 
@@ -35,7 +35,7 @@ public class FrictionMotion : Motion
 
         if (rigidbody.velocity.sqrMagnitude == 0f)
         {
-            Vector3 staticFrictionForce = frictionStaticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceNorm;
+            Vector3 staticFrictionForce = frictionStaticCoeff.Value * objectMass.Value * Physics.gravity.y * appliedForceOnObject.Value.normalized;
             if (appliedForceIsActive.Value)
             {
                 if (appliedForceOnObject.Value.sqrMagnitude <= staticFrictionForce.sqrMagnitude)
@@ -43,14 +43,14 @@ public class FrictionMotion : Motion
                     // STATIC FRICTION
                     rigidbody.AddForce(-appliedForceOnObject.Value*objectMass.Value, ForceMode.Force);
                     SetVectorRepresentation(currentFriction, -appliedForceOnObject.Value*objectMass.Value);
-                    SetVectorRepresentation(currentMaxFriction, staticFrictionForce);
+                    SetVectorRepresentation(currentMaxStaticForce, -staticFrictionForce);
                     SetFrictionFlag(false);
                 }
             }
             else
             {
                 SetVectorRepresentation(currentFriction, Vector3.zero);
-                SetVectorRepresentation(currentMaxFriction, staticFrictionForce);
+                SetVectorRepresentation(currentMaxStaticForce, -staticFrictionForce);
                 SetFrictionFlag(false);
             }
         }
@@ -61,7 +61,7 @@ public class FrictionMotion : Motion
             // KINETIC FRICTION
             rigidbody.AddForce(kineticFrictionForce, ForceMode.Force);
             SetVectorRepresentation(currentFriction, kineticFrictionForce);
-            SetVectorRepresentation(currentMaxFriction, kineticFrictionForce);
+            SetVectorRepresentation(currentMaxStaticForce, -kineticFrictionForce);
             SetFrictionFlag(true);
         }
 
