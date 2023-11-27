@@ -40,7 +40,7 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: 6e2cd20b281d9620eb33cc0a3044649d, type: 2}
-  currentMaxFriction:
+  currentMaxStaticForce:
     UseConstant: 0
     ConstantValue: {x: -1.9620001, y: -0, z: -0}
     Variable: {fileID: 11400000, guid: db192a9bb4c1d209495eba1a19aeb332, type: 2}
