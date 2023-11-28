@@ -1110,6 +1110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 353135136}
   - component: {fileID: 353135135}
+  - component: {fileID: 353135137}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -1137,48 +1138,9 @@ MonoBehaviour:
   responseOnKeyDown:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: cb1e70f530fc5d438b6408c0f21fe751, type: 2}
-        m_TargetAssemblyTypeName: BaseVariable`1[[System.Boolean, mscorlib
-        m_MethodName: set_Value
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 595982323230301745}
-        m_TargetAssemblyTypeName: ChangeableColor, Assembly-CSharp
-        m_MethodName: SetColor
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  responseOnKeyUp:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: cb1e70f530fc5d438b6408c0f21fe751, type: 2}
-        m_TargetAssemblyTypeName: BaseVariable`1[[System.Boolean, mscorlib
-        m_MethodName: set_Value
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 595982323230301745}
-        m_TargetAssemblyTypeName: ChangeableColor, Assembly-CSharp
-        m_MethodName: ResetColor
+      - m_Target: {fileID: 1014834923}
+        m_TargetAssemblyTypeName: ToggleIcons, Assembly-CSharp
+        m_MethodName: ToggleTrueFalse
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1188,6 +1150,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  responseOnKeyUp:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &353135136
 Transform:
   m_ObjectHideFlags: 0
@@ -1203,6 +1168,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &353135137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353135134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2e26c2fd37d375c8e419354be7a208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive:
+    UseConstant: 1
+    ConstantValue: 1
+    Variable: {fileID: 0}
+  key: 13
+  responseOnKeyDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 414847128}
+        m_TargetAssemblyTypeName: AppManager, Assembly-CSharp
+        m_MethodName: ResetApp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  responseOnKeyUp:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!43 &362626508
 Mesh:
   m_ObjectHideFlags: 0
