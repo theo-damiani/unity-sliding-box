@@ -56,9 +56,20 @@ public class DataExporter : MonoBehaviour
         listOfJsonData = new List<string>();
 
         // From InvokeRepeating: throw new UnityException("Invoke repeat rate has to be larger than 0.00001F)");
-        timeRate = (timeRate < 0.00001F) ? defaultTimeRate : timeRate;
+        SetTimeRate(timeRate);
         isRecording = false;
     }
+
+    public void SetTimeRate(float newRate)
+    {
+        timeRate = (newRate < 0.00001F) ? defaultTimeRate : newRate;
+
+        if (isRecording)
+        {
+            StopGameObjectRecording();
+        }
+    }
+
     public void StartGameObjectRecording()
     {
         isRecording = true;
@@ -85,8 +96,8 @@ public class DataExporter : MonoBehaviour
         {
             DataHolder data = new(
                     Time.realtimeSinceStartup - timeAtStart,
-                    transform.position,
-                    transform.rotation.eulerAngles,
+                    _rigidbody.transform.transform.position,
+                    _rigidbody.transform.rotation.eulerAngles,
                     _rigidbody.velocity
                 );
 
