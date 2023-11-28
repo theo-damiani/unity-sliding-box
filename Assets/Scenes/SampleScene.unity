@@ -14952,7 +14952,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 1666462918}
   timeRate: 0.1
   maxSize: 1000
-  outlineMat: {fileID: 0}
+  outlineMat: {fileID: 2100000, guid: 18a03411a428ef17985172de7bd55d7c, type: 2}
 --- !u!4 &1324181560
 Transform:
   m_ObjectHideFlags: 0
