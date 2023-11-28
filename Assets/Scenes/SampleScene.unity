@@ -14952,9 +14952,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 1666462918}
   timeRate: 0.1
   maxSize: 1000
-  savePosition: 1
-  saveRotation: 1
-  saveVelocity: 1
+  outlineMat: {fileID: 0}
 --- !u!4 &1324181560
 Transform:
   m_ObjectHideFlags: 0
@@ -15715,6 +15713,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 1cbe2400d364507f8b5a21d34b6d3521, type: 2}
+  - {fileID: 2100000, guid: 18a03411a428ef17985172de7bd55d7c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

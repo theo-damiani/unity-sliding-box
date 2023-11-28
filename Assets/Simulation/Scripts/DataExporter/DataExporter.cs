@@ -42,9 +42,7 @@ public class DataExporter : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private float timeRate;
     [SerializeField] private int maxSize;
-    [SerializeField] private bool savePosition;
-    [SerializeField] private bool saveRotation;
-    [SerializeField] private bool saveVelocity;
+    [SerializeField] private Material outlineMat;
 
     private readonly float defaultTimeRate = 0.1f;
     private List<string> listOfJsonData;
@@ -58,6 +56,7 @@ public class DataExporter : MonoBehaviour
         // From InvokeRepeating: throw new UnityException("Invoke repeat rate has to be larger than 0.00001F)");
         SetTimeRate(timeRate);
         isRecording = false;
+        SetOutlineThickness(0f);
     }
 
     public void SetTimeRate(float newRate)
@@ -76,6 +75,7 @@ public class DataExporter : MonoBehaviour
         timeAtStart = Time.realtimeSinceStartup;
         listOfJsonData.Clear();
         InvokeRepeating(nameof(SaveData), 0f, timeRate);
+        SetOutlineThickness(1.1f);
     }
 
     public void StopGameObjectRecording()
@@ -88,6 +88,7 @@ public class DataExporter : MonoBehaviour
         #endif
 
         listOfJsonData.Clear();
+        SetOutlineThickness(0f);
     }
 
     void SaveData()
@@ -106,6 +107,14 @@ public class DataExporter : MonoBehaviour
         else
         {
             StopGameObjectRecording();
+        }
+    }
+
+    private void SetOutlineThickness(float thickness)
+    {
+        if (outlineMat)
+        {
+            outlineMat.SetFloat("_Thickness", thickness);
         }
     }
 }
