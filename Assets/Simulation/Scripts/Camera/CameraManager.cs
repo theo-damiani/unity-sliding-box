@@ -122,4 +122,10 @@ public class CameraManager : MonoBehaviour
     {
         return distanceToTarget.Value;
     }
+
+    public void ToggleTopDown()
+    {
+        distanceToTarget.Value = Vector3.up*6;
+        transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
+    }
 }
