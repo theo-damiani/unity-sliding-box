@@ -4,12 +4,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-namespace System.Runtime.CompilerServices
-{
-    internal static class IsExternalInit {}
-}
-
-
 [Serializable]
 public class JsonableListWrapper<T>
 {

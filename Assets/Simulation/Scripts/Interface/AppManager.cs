@@ -54,6 +54,7 @@ public class AppManager : Singleton<AppManager>
 
     [Header("Infinite distance measure")]
     [SerializeField] private InfiniteTimeLine infiniteTimeLine;
+    [SerializeField] private InfiniteIceDot infiniteDot;
 
 
 
@@ -155,5 +156,8 @@ public class AppManager : Singleton<AppManager>
         timerToggle.gameObject.SetActive(true);
         timerToggle.GetComponent<ToggleIcons>().SetToFalse();
         infiniteTimeLine.InitTimeLine();
+
+        // ============= Infinite Dot =============
+        infiniteDot.InitMarkerDot();
     }
 }

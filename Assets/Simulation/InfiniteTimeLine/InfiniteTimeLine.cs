@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(ParticleSystem), typeof(LineRenderer))]
 public class InfiniteTimeLine : MonoBehaviour
 {
-    [SerializeField] private GameObject linePrefab;
     [SerializeField] private Vector3Reference lineDirection;
     [SerializeField] private int nbOfMarkers;
     [SerializeField] private float markersOffset;
@@ -82,7 +81,7 @@ public class InfiniteTimeLine : MonoBehaviour
         for (int i = 0; i < nbOfMarkers; i++) {
             markers[i].position = transform.position + (lineHalfSize * -lineDirectionNormalized) + (markersOffset * i * lineDirectionNormalized);
             //markers[i].position += lineDirectionNormalized*0.1f;
-            markers[i].startSize3D = new Vector3(1f,0.1f,0.1f);
+            markers[i].startSize3D = new Vector3(0.8f,0.1f,0.1f);
             // Marker are oriented such that their forward (blue) axis are along the line direction;
             markers[i].rotation3D = rotationTowardsLineDirection;
             markers[i].startColor = new Color(1,1,1,1);

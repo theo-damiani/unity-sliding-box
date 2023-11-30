@@ -9,9 +9,8 @@ public class CameraManager : MonoBehaviour
     public float maxCameraDist;
     public bool isLockedOnTarget = true;
     public Slider zoomSlider;
-
     private Vector3 initOffsetToTarget;
-    private Vector3 distanceToTarget;
+    public Vector3Reference distanceToTarget;
     private Vector3 minDistanceToTarget;
     private Vector3 zoomDirScaled = Vector3.zero;
     private Vector3 previousTargetPos;
@@ -44,7 +43,7 @@ public class CameraManager : MonoBehaviour
         float initOffsetClamped = Mathf.Clamp(initOffsetToTarget.magnitude, minDistanceToObject, GetSliderMax());
         initOffsetToTarget = initOffsetToTarget.normalized*initOffsetClamped;
 
-        distanceToTarget = initOffsetToTarget;
+        distanceToTarget.Value = initOffsetToTarget;
         minDistanceToTarget = (initPos - target.localPosition).normalized * minDistanceToObject;
         uiSlider.SetValueWithoutNotify(CameraToSlider(initOffsetToTarget.magnitude));
         zoomDirScaled = minDistanceToTarget * initOffsetToTarget.magnitude;
@@ -56,7 +55,7 @@ public class CameraManager : MonoBehaviour
     {
         if (isLockedOnTarget)
         {
-            gameObject.transform.localPosition = target.localPosition + distanceToTarget;
+            gameObject.transform.localPosition = target.localPosition + distanceToTarget.Value;
             previousTargetPos = target.localPosition;
         }
     }
@@ -66,7 +65,7 @@ public class CameraManager : MonoBehaviour
         zoomDirScaled = minDistanceToTarget * SliderToCamera(value);
         if (isLockedOnTarget)
         {
-            distanceToTarget = zoomDirScaled;
+            distanceToTarget.Value = zoomDirScaled;
         }
         else
         {
@@ -84,7 +83,7 @@ public class CameraManager : MonoBehaviour
         }
         else
         {
-            distanceToTarget = zoomDirScaled;
+            distanceToTarget.Value = zoomDirScaled;
         }
     }
 
@@ -98,7 +97,7 @@ public class CameraManager : MonoBehaviour
         }
         else
         {
-            distanceToTarget = zoomDirScaled;
+            distanceToTarget.Value = zoomDirScaled;
         }
     }
 
@@ -117,5 +116,10 @@ public class CameraManager : MonoBehaviour
     {
         // return Mathf.Exp(value);
         return value;
+    }
+
+    public Vector3 GetDistanceToTarget()
+    {
+        return distanceToTarget.Value;
     }
 }
