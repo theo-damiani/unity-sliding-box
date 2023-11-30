@@ -86,7 +86,7 @@ public class FrictionObject : MonoBehaviour
 
         material.SetFloat("_Metallic", Mathf.Lerp(metallicOnIce, metallicOnGrip, lerpTime));
         material.SetFloat("_Smoothness", Mathf.Lerp(smoothnessOnIce, smoothnessOnGrip, lerpTime));
-        material.SetFloat("_Normals", Mathf.Lerp(normalsOnIce, normalsOnGrip, lerpTime));
+        material.SetFloat("_Normals", Mathf.Lerp(normalsOnIce, normalsOnGrip, easingTime));
         material.SetFloat("_Refraction", Mathf.Lerp(refractionOnIce, refractionOnGrip, easingTime));
         material.SetFloat("_RefractionScale", Mathf.Lerp(refractionScaleOnIce, refractionScaleOnGrip, lerpTime));
         material.SetFloat("_RefractionOffset", Mathf.Lerp(refractionOffsetOnIce, refractionOffsetOnGrip, easingTime));

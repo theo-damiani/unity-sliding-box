@@ -61,24 +61,24 @@ Material:
     - _NoiseScale: 3
     - _NormalStrengh: 0.15
     - _NormalStrength: 3.93
-    - _Normals: 2
+    - _Normals: 3.3672307
     - _Power: 8.94
     - _QueueControl: 0
     - _QueueOffset: -1
     - _ReflectionStrength: 3.55
     - _ReflexionOffset: 0
     - _ReflexionStrengh: 1.5
-    - _Refraction: 1.2043412
-    - _RefractionOffset: 0.006021706
-    - _RefractionScale: 0.08
-    - _Smoothness: 0.46
+    - _Refraction: 0
+    - _RefractionOffset: 0
+    - _RefractionScale: 0.09127506
+    - _Smoothness: 0.4825501
     - _Strenght: 2
     - _Tiling: 397
     - _depth: 0.72
     - _normals: 1.27
     - _power: 1.32
     m_Colors:
-    - _Color: {r: 0.3063696, g: 0.6031164, b: 0.61413836, a: 0}
+    - _Color: {r: 0.40787673, g: 0.82072896, b: 0.83670324, a: 0}
     - _Deep_Color: {r: 0, g: 0.7568628, b: 0.8313726, a: 0.44705883}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _FrostColor: {r: 1, g: 1, b: 1, a: 0}
@@ -87,7 +87,7 @@ Material:
     - _Shallow_Color: {r: 0.4823529, g: 0.98039216, b: 1, a: 0.1960784}
     - _Tiling: {r: 40, g: 2, b: 0, a: 0}
     - _TintColor: {r: 0.12858838, g: 1, b: 0.8291351, a: 0}
-    - _UV: {r: 0, g: 0, b: 0, a: 0}
+    - _UV: {r: -2.0386903, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8518845856779618268
 MonoBehaviour:
