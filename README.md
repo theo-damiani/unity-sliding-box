@@ -1,4 +1,4 @@
-# Space Rocket App
+# Friction App
 
 [![Documentation](https://img.shields.io/badge/Unity-2022.3.9f1-informational)](/README.md)
 
