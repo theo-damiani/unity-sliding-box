@@ -927,7 +927,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330585548}
+        m_TargetAssemblyTypeName: CameraManager, Assembly-CSharp
+        m_MethodName: ToggleTopDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &330585543
 GameObject:
@@ -1082,7 +1094,7 @@ MonoBehaviour:
   target: {fileID: 1666462913}
   maxCameraDist: 30
   isLockedOnTarget: 1
-  zoomSlider: {fileID: 0}
+  zoomSlider: {fileID: 2024884282}
   distanceToTarget:
     UseConstant: 0
     ConstantValue: {x: 0, y: 0, z: 0}
@@ -2753,7 +2765,7 @@ MonoBehaviour:
   refractionScaleOnGrip: 0
   refractionOnGrip: 0
   normalsOnGrip: 20
-  colorOnGrip: {r: 0.03999412, g: 0.032056633, b: 0.03008264, a: 0}
+  colorOnGrip: {r: 0.48235294, g: 0.98039216, b: 1, a: 0}
   curve:
     serializedVersion: 2
     m_Curve:
@@ -22216,6 +22228,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customCursor: {fileID: 11400000, guid: 684d79e95eecf4b9197ede40cef826b0, type: 2}
+--- !u!114 &2024884282 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7946162021822152520, guid: 3fe8e6f7ddce64389b8006f7363c5313,
+    type: 3}
+  m_PrefabInstance: {fileID: 2024884276}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024884278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!21 &2034743582
 Material:
   serializedVersion: 8

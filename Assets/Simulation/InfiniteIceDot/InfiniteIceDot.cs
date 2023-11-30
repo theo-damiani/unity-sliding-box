@@ -29,13 +29,14 @@ public class InfiniteIceDot : MonoBehaviour
         psMain.startSize3D = true;
         psMain.startRotation3D = true;
 
+        SetLineHalfSize();
         InitMarkerDot();
     }
 
     public void SetLineHalfSize()
     {
         Vector3 transformInScreen = mainCamera.WorldToScreenPoint(transform.position);
-        Vector3 leftCamPointInWorld = mainCamera.ScreenToWorldPoint(new Vector3(0, transformInScreen.y, camDistToTarget.Value.magnitude));
+        Vector3 leftCamPointInWorld = mainCamera.ScreenToWorldPoint(new Vector3(-50, transformInScreen.y, camDistToTarget.Value.magnitude));
         lineHalfSize = (leftCamPointInWorld - transform.position).magnitude;
         lineHalfSizeVector3 = lineDirectionNormalized*lineHalfSize;
         lineHalfSizeSqr = (lineHalfSize*lineDirectionNormalized).sqrMagnitude;
@@ -57,8 +58,8 @@ public class InfiniteIceDot : MonoBehaviour
         GetComponent<ParticleSystem>().SetParticles ( markers, markers.Length );
     }
 
-    private bool isFullOpaque = false;
-    private bool systemNeedUpdate = false;
+    // private bool isFullOpaque = false;
+    // private bool systemNeedUpdate = false;
 
     void Update () 
     {
@@ -67,30 +68,37 @@ public class InfiniteIceDot : MonoBehaviour
         if ((distSqr - lineHalfSizeVector3.sqrMagnitude) > 0)
         {
             markers[0].position = transform.position + (lineHalfSize * lineDirectionNormalized);
-            systemNeedUpdate = true;
-        }
-
-        if (distSqr >= distOffsetSqr) 
-        {
-            float percent = (distSqr - distOffsetSqr) / (lineHalfSizeSqr-distOffsetSqr);
-            markers[0].startColor = new Color(1,1,1, 1-percent);
-            isFullOpaque = false;
-            systemNeedUpdate = true;
-        }
-        else
-        {
-            if (isFullOpaque)
-            {
-                markers[0].startColor = new Color(1,1,1, 1);
-                isFullOpaque = true;
-                systemNeedUpdate = true;
-            }
-        }
-
-        if (systemNeedUpdate)
-        {
+            //systemNeedUpdate = true;
             GetComponent<ParticleSystem>().SetParticles ( markers, 1 );
-            systemNeedUpdate = false;
+
         }
+
+        // FadeOut
+        // if (distSqr >= distOffsetSqr) 
+        // {
+        //     float percent = (distSqr - distOffsetSqr) / (lineHalfSizeSqr-distOffsetSqr);
+        //     markers[0].startColor = new Color(1,1,1, 1-percent);
+        //     isFullOpaque = false;
+        //     systemNeedUpdate = true;
+        //     GetComponent<ParticleSystem>().SetParticles ( markers, 1 );
+
+        // }
+        // else
+        // {
+        //     if (isFullOpaque)
+        //     {
+        //         markers[0].startColor = new Color(1,1,1, 1);
+        //         isFullOpaque = true;
+        //         systemNeedUpdate = true;
+        //     GetComponent<ParticleSystem>().SetParticles ( markers, 1 );
+
+        //     }
+        // }
+
+        // if (systemNeedUpdate)
+        // {
+        //     GetComponent<ParticleSystem>().SetParticles ( markers, 1 );
+        //     systemNeedUpdate = false;
+        // }
     }
 }

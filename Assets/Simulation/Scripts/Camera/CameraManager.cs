@@ -15,6 +15,10 @@ public class CameraManager : MonoBehaviour
     private Vector3 zoomDirScaled = Vector3.zero;
     private Vector3 previousTargetPos;
 
+    private Vector3 previousDistanceToTarget;
+    private Vector3 previousMinDistanceToTarget;
+    private bool isTopDown;
+
     void Start()
     {
         if (!target)
@@ -125,7 +129,9 @@ public class CameraManager : MonoBehaviour
 
     public void ToggleTopDown()
     {
-        distanceToTarget.Value = Vector3.up*6;
+
+        previousDistanceToTarget = distanceToTarget.Value;
+        distanceToTarget.Value = Vector3.up*distanceToTarget.Value.magnitude;
         transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
     }
 }
