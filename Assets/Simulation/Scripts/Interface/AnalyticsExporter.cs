@@ -5,16 +5,16 @@ using UnityEngine;
 [Serializable]
 public struct UserTraceHolder
 {
-    public UserTraceHolder(float t, string i, bool h, string x)
+    public UserTraceHolder(string t, string i, bool h, string x)
     {
         time = t;
         objectId = i;
-        isHolding = h;
+        objectIsHold = h;
         extra = x;
     }
-    public float time;
+    public string time;
     public string objectId;
-    public bool isHolding;
+    public bool objectIsHold;
     public string extra;
 }
 

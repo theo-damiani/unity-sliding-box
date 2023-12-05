@@ -159,5 +159,17 @@ public class AppManager : Singleton<AppManager>
 
         // ============= Infinite Dot =============
         infiniteDot.InitMarkerDot();
+
+        // ============= UI Canvas position =============
+        // if (!currentAffordances.showPlayPauseButton && !currentAffordances.showResetButton)
+        // {
+        //     metaPanel.gameObject.SetActive(false);
+        //     cameraControls.GetComponent<RectTransform>().anchoredPosition = new Vector2(25, -25);
+        // }
+        // else
+        // {
+        //     metaPanel.gameObject.SetActive(true);
+        //     cameraControls.GetComponent<RectTransform>().anchoredPosition = new Vector2(25, -110);
+        // }
     }
 }

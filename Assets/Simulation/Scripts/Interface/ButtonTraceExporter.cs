@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class ButtonTraceExporter : AnalyticsExporter
 {
     [SerializeField] private Button button;
-    [SerializeField] private bool isButtonClicked;
+    [SerializeField] private bool buttonIsOnlyClickable;
 
     void OnEnable()
     {
@@ -24,7 +24,7 @@ public class ButtonTraceExporter : AnalyticsExporter
 
     public override void CreatAndSendNewTrace()
     {
-        UserTraceHolder newUserTrace = new(Time.timeSinceLevelLoad, button.gameObject.name, !isButtonClicked, "");
+        UserTraceHolder newUserTrace = new(Time.timeSinceLevelLoad.ToString("F2"), button.gameObject.name, !buttonIsOnlyClickable, "");
 
         SendNewTrace(newUserTrace);
     }

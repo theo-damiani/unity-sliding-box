@@ -1520,7 +1520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 7176590247923345127}
-  isButtonClicked: 1
+  buttonIsOnlyClickable: 1
 --- !u!4 &374005441
 Transform:
   m_ObjectHideFlags: 0

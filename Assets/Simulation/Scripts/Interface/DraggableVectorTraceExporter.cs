@@ -30,7 +30,7 @@ public class DraggableVectorTraceExporter : AnalyticsExporter
     }
     public override void CreatAndSendNewTrace()
     {
-        UserTraceHolder newUserTrace = new(Time.timeSinceLevelLoad, vector.gameObject.name, true, "components: " + vector.components.Value.ToString());
+        UserTraceHolder newUserTrace = new(Time.timeSinceLevelLoad.ToString("F2"), vector.gameObject.name, true, "components: " + vector.components.Value.ToString());
 
         SendNewTrace(newUserTrace);
     }
