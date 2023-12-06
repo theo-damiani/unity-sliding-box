@@ -3,18 +3,25 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 
 [Serializable]
+public enum UnityActionType {
+    Click,
+    Press,
+    Release,
+}
+
+[Serializable]
 public struct UserTraceHolder
 {
-    public UserTraceHolder(string t, string i, bool h, string x)
+    public UserTraceHolder(double t, string i, UnityActionType a, string x)
     {
-        time = t;
+        time = Math.Round(t, 2);
         objectId = i;
-        objectIsHold = h;
+        actionType = a;
         extra = x;
     }
-    public string time;
+    public double time;
     public string objectId;
-    public bool objectIsHold;
+    public UnityActionType actionType;
     public string extra;
 }
 
@@ -22,8 +29,6 @@ public abstract class AnalyticsExporter : MonoBehaviour
 {
     [DllImport("__Internal")]
     private static extern void NewUnityUserTrace (string dataJSON);
-
-    public abstract void CreatAndSendNewTrace();
     public void SendNewTrace(UserTraceHolder trace)
     {
         Debug.Log(JsonUtility.ToJson(trace));

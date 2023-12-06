@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class DraggableVectorTraceExporter : AnalyticsExporter
@@ -10,8 +12,8 @@ public class DraggableVectorTraceExporter : AnalyticsExporter
     {
         if(vector)
         {
-            vector.GetHeadClickZone().OnZoneMouseDown += WrapperCreateNewTrace;
-            vector.GetHeadClickZone().OnZoneMouseUp += WrapperCreateNewTrace;
+            vector.GetHeadClickZone().OnZoneMouseDown += WrapperPressTrace;
+            vector.GetHeadClickZone().OnZoneMouseUp += WrapperReleaseTrace;
         }
     } 
 
@@ -19,18 +21,22 @@ public class DraggableVectorTraceExporter : AnalyticsExporter
     {
         if(vector)
         {
-            vector.GetHeadClickZone().OnZoneMouseDown -= WrapperCreateNewTrace;
-            vector.GetHeadClickZone().OnZoneMouseUp -= WrapperCreateNewTrace;
+            vector.GetHeadClickZone().OnZoneMouseDown -= WrapperPressTrace;
+            vector.GetHeadClickZone().OnZoneMouseUp -= WrapperReleaseTrace;
         }
     }
 
-    private void WrapperCreateNewTrace(VectorClickZone clickZone)
+    private void WrapperPressTrace(VectorClickZone clickZone)
     {
-        CreatAndSendNewTrace();
+        CreatAndSendNewTrace(UnityActionType.Press);
     }
-    public override void CreatAndSendNewTrace()
+    private void WrapperReleaseTrace(VectorClickZone clickZone)
     {
-        UserTraceHolder newUserTrace = new(Time.timeSinceLevelLoad.ToString("F2"), vector.gameObject.name, true, "components: " + vector.components.Value.ToString());
+        CreatAndSendNewTrace(UnityActionType.Release);
+    }
+    private void CreatAndSendNewTrace(UnityActionType actionType)
+    {
+        UserTraceHolder newUserTrace = new(Time.timeSinceLevelLoadAsDouble, vector.gameObject.name, actionType, "components: " + vector.components.Value.ToString());
 
         SendNewTrace(newUserTrace);
     }
