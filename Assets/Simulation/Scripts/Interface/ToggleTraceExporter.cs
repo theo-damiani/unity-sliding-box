@@ -1,11 +1,21 @@
-using System;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 
 [Serializable]
-public class ButtonUITrace : UserTraceHolder 
+public class ExtraToggleValue
 {
-    public ButtonUITrace(double t, string i, UnityActionType a, string x)
+    public ExtraToggleValue(bool v)
+    {
+        value = v;
+    }
+    public bool value;
+}
+
+[Serializable]
+public class ToggleUITrace : UserTraceHolder 
+{
+    public ToggleUITrace(double t, string i, UnityActionType a, ExtraToggleValue x)
     {
         time = t;
         objectId = i;
@@ -15,11 +25,12 @@ public class ButtonUITrace : UserTraceHolder
     public double time;
     public string objectId;
     public UnityActionType actionType;
-    public string extra;
+    public ExtraToggleValue extra;
 }
-public class ButtonTraceExporter : AnalyticsExporter
+public class ToggleTraceExporter : AnalyticsExporter
 {
     [SerializeField] private Button button;
+    [SerializeField] private ToggleIcons toggle;
 
     void OnEnable()
     {
@@ -39,7 +50,7 @@ public class ButtonTraceExporter : AnalyticsExporter
 
     private void CreatAndSendNewTrace()
     {
-        ButtonUITrace newUserTrace = new(Math.Round(Time.timeSinceLevelLoadAsDouble, 2), button.gameObject.name, UnityActionType.Click, "");
+        ToggleUITrace newUserTrace = new(Math.Round(Time.timeSinceLevelLoadAsDouble, 2), button.gameObject.name, UnityActionType.Click, new ExtraToggleValue(toggle.GetToggleValue()));
 
         SendNewTrace(newUserTrace);
     }

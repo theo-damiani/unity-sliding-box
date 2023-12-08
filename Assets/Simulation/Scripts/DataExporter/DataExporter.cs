@@ -1,16 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using UnityEngine;
-
-[Serializable]
-public class JsonableListWrapper<T>
-{
-    public List<T> list;
-    public JsonableListWrapper(List<T> list) => this.list = list;
-}
- 
+using UnityEngine; 
 
 [Serializable]
 public struct DataHolder

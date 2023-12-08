@@ -5,25 +5,39 @@ using UnityEngine;
 [Serializable]
 public enum UnityActionType {
     Click,
-    Press,
-    Release,
+    Drag
 }
 
+// Unity do not support the serialization of nested abstract object:
+/*
 [Serializable]
-public struct UserTraceHolder
+public class MainType
 {
-    public UserTraceHolder(double t, string i, UnityActionType a, string x)
-    {
-        time = Math.Round(t, 2);
-        objectId = i;
-        actionType = a;
-        extra = x;
-    }
-    public double time;
-    public string objectId;
-    public UnityActionType actionType;
-    public string extra;
-}
+    public string p1;
+    public List<ParentType> p2;
+} 
+
+[Serializable]
+public abstract class ParentType {}
+
+[Serializable]
+public class SubTypeA : ParentType
+{
+    public int a;
+} 
+
+[Serializable]
+public class SubTypeB : ParentType
+{
+    public string b;
+} 
+
+Unity will not serialize the property p2 in the MainType !
+That is why ParentType has been removed, the MainType has been made abstract and the definition has been moved subclasses.
+*/
+
+[Serializable]
+public abstract class UserTraceHolder {}
 
 public abstract class AnalyticsExporter : MonoBehaviour
 {

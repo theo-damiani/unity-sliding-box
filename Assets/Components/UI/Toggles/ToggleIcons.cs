@@ -97,6 +97,11 @@ public class ToggleIcons : MonoBehaviour
         }
     }
 
+    public bool GetToggleValue()
+    {
+        return isTrue;
+    }
+
     public void ToggleTrueFalse()
     {
         if (isTrue)
