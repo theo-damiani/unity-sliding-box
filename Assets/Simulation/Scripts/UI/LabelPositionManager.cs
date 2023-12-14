@@ -18,7 +18,7 @@ public class LabelPositionManager : MonoBehaviour
     [SerializeField] private float startY;
     private int nbOfItemsActive;
 
-    void Start()
+    public void Init()
     {
         float showingY = 0;
         nbOfItemsActive = 0;
@@ -26,10 +26,10 @@ public class LabelPositionManager : MonoBehaviour
         {
             UiItems UIitem = uiItems[i];
             if (UIitem.IsActive.Value) {
-                //showingY -= (UIitem.Item.transform as RectTransform).rect.height;
-                Vector3 currentPos = UIitem.Item.transform.localPosition;
+                UIitem.Item.SetActive(true);
+
                 float newY = startY + spacingTop*nbOfItemsActive;
-                UIitem.Item.transform.localPosition = new Vector3(currentPos.x, currentPos.y+newY, currentPos.z);
+                UIitem.Item.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, newY, 0);
                 nbOfItemsActive++;
             }
             else
@@ -40,8 +40,7 @@ public class LabelPositionManager : MonoBehaviour
 
         if (nbOfItemsActive==0)
         {
-            showingY = -50;
-            gameObject.SetActive(false);
+            showingY = 50;
         }
         else
         {

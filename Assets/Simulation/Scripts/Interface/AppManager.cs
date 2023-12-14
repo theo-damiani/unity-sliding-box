@@ -20,10 +20,11 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private ToggleIcons cameraLockingToggle;
     [SerializeField] private RectTransform cameraZoomSlider;
 
-    [Header("Main App Controls")]
+    [Header("Meta Controls")]
     [SerializeField] private RectTransform playButton;
     [SerializeField] private RectTransform resetButton;
     [SerializeField] private RectTransform metaPanel;
+    [SerializeField] private BoolVariable isResetBtnEnable;
 
     [Header("Main object variables")]
     [SerializeField] private Transform mainObject;
@@ -32,6 +33,7 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private Vector3Variable boxVelocity;
     [SerializeField] private DraggableVector boxVelocityVector;
     [SerializeField] private GameObject boxVelocityLabel;
+    [SerializeField] private BoolVariable isVelocityEquationEnable;
 
     [Header("Force Pushing Object 1")]
     [SerializeField] private BoolVariable pushIsActive;
@@ -42,6 +44,8 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private BoolVariable pushShowEquation;
     [SerializeField] private DraggableVector pushVector;
     [SerializeField] private ToggleIcons pushForceToggle;
+    [SerializeField] private BoolVariable isPushEquationEnable;
+
 
     [Header("Friction 1")]
     [SerializeField] private FloatVariable staticFrictionCoeff;
@@ -49,6 +53,8 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private Vector frictionVector;
     [SerializeField] private Slider staticFrictionSlider;
     [SerializeField] private Slider kineticFrictionSlider;
+    [SerializeField] private BoolVariable isFrictionEquationEnable;
+
 
     [Header("Timer")]
     [SerializeField] private RectTransform timerToggle;
@@ -56,6 +62,11 @@ public class AppManager : Singleton<AppManager>
     [Header("Infinite distance measure")]
     [SerializeField] private InfiniteTimeLine infiniteTimeLine;
     [SerializeField] private InfiniteIceDot infiniteDot;
+
+    [Header("Extra")]
+    [SerializeField] private LabelPositionManager equationsManager;
+
+
 
 
 
@@ -84,6 +95,7 @@ public class AppManager : Singleton<AppManager>
         // ============= Main control =============
         playButton.gameObject.SetActive(currentAffordances.showPlayPauseButton);
         resetButton.gameObject.SetActive(currentAffordances.showResetButton);
+        isResetBtnEnable.Value = currentAffordances.showResetButton;
 
         playButton.GetComponent<PlayButton>().PlayWithoutRaising();
 
@@ -160,6 +172,13 @@ public class AppManager : Singleton<AppManager>
 
         // ============= Infinite Dot =============
         infiniteDot.InitMarkerDot();
+
+        // ============= Equations =============
+        isFrictionEquationEnable.Value = true;
+        isPushEquationEnable.Value = currentAffordances.pushForce.showEquation;
+        isVelocityEquationEnable.Value = currentAffordances.physicalObject.showVelocityEquation;
+
+        equationsManager.Init();
 
         // ============= UI Canvas position =============
         if (!currentAffordances.showPlayPauseButton && !currentAffordances.showResetButton)
