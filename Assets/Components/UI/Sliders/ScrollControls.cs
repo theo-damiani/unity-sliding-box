@@ -18,7 +18,7 @@ public class ScrollControls : MonoBehaviour
         float mouseScroll = Input.mouseScrollDelta.y;
         if (mouseScroll!=0)
         {
-            slider.value -= mouseScroll*scale;
+            slider.value += mouseScroll*scale;
         }
     }
 }
