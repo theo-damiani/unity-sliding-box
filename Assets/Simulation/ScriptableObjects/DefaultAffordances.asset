@@ -45,12 +45,12 @@ MonoBehaviour:
       Z: 0
     velocityVectorIsInteractive: 1
     showVelocityLabel: 0
-    showVelocityEquation: 1
+    showVelocityEquation: 0
   pushForce:
     isActive: 0
     isInteractive: 1
     isConfigurable: 1
     showVector: 1
     showLabel: 0
-    showEquation: 1
+    showEquation: 0
     initialMagnitude: 1

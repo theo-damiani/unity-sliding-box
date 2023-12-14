@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <color=#ffffff00>-</color>0.0
+  m_text: <color=#ffffff00>-</color>0.00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1861,9 +1861,10 @@ MonoBehaviour:
         m_CallState: 2
   valueTMP: {fileID: 124878636}
   snapToDecimal: 0
-  numDecimalDigits: 1
+  numDecimalDigits: 2
   color: {r: 0.41960785, g: 0.627451, b: 0.4514161, a: 1}
   applyColorToValue: 0
+  dynamicMaxValue: {fileID: 11400000, guid: 8ea8bd7c406c7ed3ca193a4f36bbb96a, type: 2}
 --- !u!21 &430424223
 Material:
   serializedVersion: 8
@@ -27933,9 +27934,10 @@ MonoBehaviour:
         m_CallState: 2
   valueTMP: {fileID: 5536735365641881315}
   snapToDecimal: 0
-  numDecimalDigits: 1
+  numDecimalDigits: 2
   color: {r: 0.41960785, g: 0.627451, b: 0.4514161, a: 1}
   applyColorToValue: 0
+  dynamicMaxValue: {fileID: 0}
 --- !u!1 &5536735365069140451
 GameObject:
   m_ObjectHideFlags: 0
@@ -28324,7 +28326,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <color=#ffffff00>-</color>0.0
+  m_text: <color=#ffffff00>-</color>0.00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

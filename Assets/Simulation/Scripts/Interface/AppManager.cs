@@ -174,7 +174,7 @@ public class AppManager : Singleton<AppManager>
         infiniteDot.InitMarkerDot();
 
         // ============= Equations =============
-        isFrictionEquationEnable.Value = true;
+        isFrictionEquationEnable.Value = false;
         isPushEquationEnable.Value = currentAffordances.pushForce.showEquation;
         isVelocityEquationEnable.Value = currentAffordances.physicalObject.showVelocityEquation;
 
