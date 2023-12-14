@@ -23,6 +23,7 @@ public class AppManager : Singleton<AppManager>
     [Header("Main App Controls")]
     [SerializeField] private RectTransform playButton;
     [SerializeField] private RectTransform resetButton;
+    [SerializeField] private RectTransform metaPanel;
 
     [Header("Main object variables")]
     [SerializeField] private Transform mainObject;
@@ -83,7 +84,7 @@ public class AppManager : Singleton<AppManager>
         // ============= Main control =============
         playButton.gameObject.SetActive(currentAffordances.showPlayPauseButton);
         resetButton.gameObject.SetActive(currentAffordances.showResetButton);
-        
+
         playButton.GetComponent<PlayButton>().PlayWithoutRaising();
 
         // ============= Box =============
@@ -161,15 +162,15 @@ public class AppManager : Singleton<AppManager>
         infiniteDot.InitMarkerDot();
 
         // ============= UI Canvas position =============
-        // if (!currentAffordances.showPlayPauseButton && !currentAffordances.showResetButton)
-        // {
-        //     metaPanel.gameObject.SetActive(false);
-        //     cameraControls.GetComponent<RectTransform>().anchoredPosition = new Vector2(25, -25);
-        // }
-        // else
-        // {
-        //     metaPanel.gameObject.SetActive(true);
-        //     cameraControls.GetComponent<RectTransform>().anchoredPosition = new Vector2(25, -110);
-        // }
+        if (!currentAffordances.showPlayPauseButton && !currentAffordances.showResetButton)
+        {
+            metaPanel.gameObject.SetActive(false);
+            cameraControls.GetComponent<RectTransform>().anchoredPosition = new Vector2(25, -25);
+        }
+        else
+        {
+            metaPanel.gameObject.SetActive(true);
+            cameraControls.GetComponent<RectTransform>().anchoredPosition = new Vector2(25, -110);
+        }
     }
 }

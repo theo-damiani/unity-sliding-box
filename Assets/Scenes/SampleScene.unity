@@ -1754,6 +1754,7 @@ MonoBehaviour:
   cameraZoomSlider: {fileID: 2024884277}
   playButton: {fileID: 5354190818689213497}
   resetButton: {fileID: 7176590247923345121}
+  metaPanel: {fileID: 209970116}
   mainObject: {fileID: 1666462913}
   showPathToggle: {fileID: 839493105}
   showPath: {fileID: 11400000, guid: d8038fd055ae127609893aed7bd94c12, type: 2}
