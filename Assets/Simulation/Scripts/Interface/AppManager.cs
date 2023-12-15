@@ -148,6 +148,8 @@ public class AppManager : Singleton<AppManager>
         Slider zoomSlider = cameraZoomSlider.GetComponent<Slider>();
         float minDistanceToObject = (mainObject.localScale.x + mainObject.localScale.y + mainObject.localScale.z)/3;
         // Init camera
+        mainCamera.transform.localRotation = Quaternion.Euler(currentAffordances.camera.rotation.ToVector3());
+        
         mainCamera.InitCamera(
             mainObject,
             cameraPos,
@@ -156,7 +158,6 @@ public class AppManager : Singleton<AppManager>
             zoomSlider
         );
 
-        mainCamera.transform.localRotation = Quaternion.Euler(currentAffordances.camera.rotation.ToVector3());
 
         cameraControls.gameObject.SetActive(currentAffordances.camera.showCameraControl);
 

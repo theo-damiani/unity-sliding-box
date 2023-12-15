@@ -17,6 +17,11 @@ public class CameraManager : MonoBehaviour
     private Vector3 zoomDirScaled = Vector3.zero;
     private Vector3 previousTargetPos;
 
+    private bool isTopDown;
+    private Vector3 initMinDistanceToTarget;
+    private Vector3 topDownMinDistanceToTarget;
+    private Quaternion previousRotation;
+
 
     void Start()
     {
@@ -52,6 +57,10 @@ public class CameraManager : MonoBehaviour
         zoomDirScaled = minDistanceToTarget * initOffsetToTarget.magnitude;
 
         zoomSlider = uiSlider;
+
+        // For camera rotation on drag
+        initMinDistanceToTarget = minDistanceToTarget;
+        topDownMinDistanceToTarget = Vector3.up*minDistanceToTarget.magnitude;
     }
 
     void LateUpdate()
@@ -128,9 +137,21 @@ public class CameraManager : MonoBehaviour
 
     public void ToggleTopDown()
     {
+        isTopDown = !isTopDown;
 
-        // previousDistanceToTarget = distanceToTarget.Value;
-        // distanceToTarget.Value = Vector3.up*distanceToTarget.Value.magnitude;
-        // transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
+        if (isTopDown) 
+        {
+            previousRotation = transform.localRotation;
+
+            distanceToTarget.Value = Vector3.up*distanceToTarget.Value.magnitude;
+            minDistanceToTarget = topDownMinDistanceToTarget;
+            transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
+        }
+        else
+        {
+            distanceToTarget.Value = initMinDistanceToTarget*distanceToTarget.Value.magnitude;
+            minDistanceToTarget = initMinDistanceToTarget;
+            transform.localRotation = previousRotation;
+        }
     }
 }
