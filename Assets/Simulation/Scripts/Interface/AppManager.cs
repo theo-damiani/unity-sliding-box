@@ -206,8 +206,8 @@ public class AppManager : Singleton<AppManager>
             cameraControls.GetComponent<RectTransform>().anchoredPosition = new Vector2(25, -110);
         }
 
-        boxVelocityLabel.GetComponent<VectorLabel>().SetSpriteOrientation();
-        pushShowLabel.GetComponent<VectorLabel>().SetSpriteOrientation();
-        frictionLabel.GetComponent<VectorLabel>().SetSpriteOrientation();
+        boxVelocityLabel.GetComponent<VectorLabel>().UpdateSprite();
+        pushShowLabel.GetComponent<VectorLabel>().UpdateSprite();
+        frictionLabel.GetComponent<VectorLabel>().UpdateSprite();
     }
 }

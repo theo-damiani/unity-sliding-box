@@ -16553,7 +16553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e044fc8d2f20431aa97cc6008b8d09b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vector: {fileID: 4608779177328071455}
+  sprite: {fileID: 848316146}
   offset: 0.5
   mainCamera: {fileID: 330585546}
   vector3Variable: {fileID: 11400000, guid: c5646fd991a27f9eb89a356d70ab2683, type: 2}
@@ -17270,7 +17270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e044fc8d2f20431aa97cc6008b8d09b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vector: {fileID: 587971314}
+  sprite: {fileID: 1356483087}
   offset: 0.5
   mainCamera: {fileID: 330585546}
   vector3Variable: {fileID: 11400000, guid: 6c3ca7da2c0c107638de5f27758b3601, type: 2}
@@ -23221,7 +23221,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: -1.96
+  m_text: 0.00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -24365,7 +24365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e044fc8d2f20431aa97cc6008b8d09b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vector: {fileID: 4608779177855009354}
+  sprite: {fileID: 748859171}
   offset: 0.5
   mainCamera: {fileID: 330585546}
   vector3Variable: {fileID: 11400000, guid: 1b516b265880aeaeaa7d69b05dac0fbf, type: 2}
@@ -25996,7 +25996,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1.96
+  m_text: 0.00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
