@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public struct UiItems
@@ -13,6 +14,7 @@ public struct UiItems
 public class LabelPositionManager : MonoBehaviour
 {
     [SerializeField] private HorizontalDrawer drawer;
+    [SerializeField] private ToggleIcons toggle;
     [SerializeField] private List<UiItems> uiItems;
     [SerializeField] private float spacingTop;
     [SerializeField] private float startY;
@@ -48,5 +50,6 @@ public class LabelPositionManager : MonoBehaviour
         }
 
         drawer.SetShowingY(showingY);
+        toggle.SetWithoutRaising(true);
     }
 }

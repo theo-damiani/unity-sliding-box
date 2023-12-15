@@ -65,6 +65,8 @@ public class AppManager : Singleton<AppManager>
 
     [Header("Extra")]
     [SerializeField] private LabelPositionManager equationsManager;
+    [SerializeField] private RectTransform objectPanel;
+
 
 
 
@@ -128,6 +130,7 @@ public class AppManager : Singleton<AppManager>
         pushVector.SetInteractable(currentAffordances.pushForce.isConfigurable);
 
         pushForceToggle.SetToggle(currentAffordances.pushForce.isActive);
+        objectPanel.gameObject.SetActive(currentAffordances.pushForce.isInteractive);
 
         // ============= Friction =============
 
@@ -191,7 +194,7 @@ public class AppManager : Singleton<AppManager>
         isFrictionEquationEnable.Value = currentAffordances.frictionEquation;
         isPushEquationEnable.Value = currentAffordances.pushForce.showEquation;
         isVelocityEquationEnable.Value = currentAffordances.physicalObject.showVelocityEquation;
-
+        
         equationsManager.Init();
 
         // ============= UI Canvas position =============

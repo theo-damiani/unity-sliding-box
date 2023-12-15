@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: IsResetBtnEnable
   m_EditorClassIdentifier: 
   DeveloperDescription: 
-  _value: 0
+  _value: 1
   _readOnly: 0
   _useDefaultValue: 0
-  _raiseWarning: 1
+  _raiseWarning: 0
   _isClamped: 0
   _minClampedValue: 0
   _maxClampedValue: 0
