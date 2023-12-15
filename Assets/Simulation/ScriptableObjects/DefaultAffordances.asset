@@ -44,13 +44,20 @@ MonoBehaviour:
       Y: 0
       Z: 0
     velocityVectorIsInteractive: 1
-    showVelocityLabel: 0
+    showVelocityLabel: 1
     showVelocityEquation: 1
   pushForce:
     isActive: 0
     isInteractive: 1
     isConfigurable: 1
     showVector: 1
-    showLabel: 0
+    showLabel: 1
     showEquation: 1
     initialMagnitude: 1
+  frictionStaticIsInteractive: 1
+  frictionKineticIsInteractive: 1
+  frictionStaticCoeff: 0.3
+  frictionKineticCoeff: 0.2
+  frictionLabel: 1
+  frictionVector: 1
+  frictionEquation: 1

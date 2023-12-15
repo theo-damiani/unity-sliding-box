@@ -41,19 +41,19 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private Vector3Variable pushForce;
     [SerializeField] private BoolVariable pushShowVector;
     [SerializeField] private GameObject pushShowLabel;
-    [SerializeField] private BoolVariable pushShowEquation;
     [SerializeField] private DraggableVector pushVector;
     [SerializeField] private ToggleIcons pushForceToggle;
     [SerializeField] private BoolVariable isPushEquationEnable;
 
 
-    [Header("Friction 1")]
+    [Header("Friction")]
     [SerializeField] private FloatVariable staticFrictionCoeff;
     [SerializeField] private FloatVariable kineticFrictionCoeff;
     [SerializeField] private Vector frictionVector;
     [SerializeField] private Slider staticFrictionSlider;
     [SerializeField] private Slider kineticFrictionSlider;
     [SerializeField] private BoolVariable isFrictionEquationEnable;
+    [SerializeField] private GameObject frictionLabel;
 
 
     [Header("Timer")]
@@ -123,7 +123,6 @@ public class AppManager : Singleton<AppManager>
         pushForce.Value = Vector3.right * currentAffordances.pushForce.initialMagnitude;
         //pushForce.Value = Quaternion.Euler(currentAffordances.physicalObject.initialRotation.ToVector3()) * pushForce.Value;
 
-        pushShowEquation.Value = currentAffordances.pushForce.showEquation;
         pushShowLabel.SetActive(currentAffordances.pushForce.showLabel);
         pushIsInteractive.Value = currentAffordances.pushForce.isInteractive;
         pushVector.SetInteractable(currentAffordances.pushForce.isConfigurable);
@@ -132,14 +131,28 @@ public class AppManager : Singleton<AppManager>
 
         // ============= Friction =============
 
-        // TODO:
-        staticFrictionCoeff.Value = 0.2f;
-        staticFrictionSlider.SetValueWithoutNotify(0.2f);
+        staticFrictionCoeff.Value = currentAffordances.frictionStaticCoeff;
+        staticFrictionSlider.interactable = currentAffordances.frictionStaticIsInteractive;
+        staticFrictionSlider.SetValueWithoutNotify(currentAffordances.frictionStaticCoeff);
+
+
+        kineticFrictionCoeff.Value = currentAffordances.frictionKineticCoeff;
+        staticFrictionSlider.interactable = currentAffordances.frictionKineticIsInteractive;
+        kineticFrictionSlider.SetValueWithoutNotify(currentAffordances.frictionKineticCoeff);
+
+        frictionVector.gameObject.SetActive(currentAffordances.frictionVector);
         frictionVector.components.Value = Vector3.zero;
         frictionVector.Redraw();
 
-        kineticFrictionCoeff.Value = 0.2f;
-        kineticFrictionSlider.SetValueWithoutNotify(0.2f);
+        if (currentAffordances.frictionVector)
+        {
+            frictionLabel.SetActive(currentAffordances.frictionLabel);
+        }
+        else
+        {
+            frictionLabel.SetActive(false);
+        }
+
         
         // ============= Camera =============
         Vector3 cameraPos = currentAffordances.camera.position.ToVector3();
@@ -149,7 +162,7 @@ public class AppManager : Singleton<AppManager>
         float minDistanceToObject = (mainObject.localScale.x + mainObject.localScale.y + mainObject.localScale.z)/3;
         // Init camera
         mainCamera.transform.localRotation = Quaternion.Euler(currentAffordances.camera.rotation.ToVector3());
-        
+
         mainCamera.InitCamera(
             mainObject,
             cameraPos,
@@ -175,7 +188,7 @@ public class AppManager : Singleton<AppManager>
         infiniteDot.InitMarkerDot();
 
         // ============= Equations =============
-        isFrictionEquationEnable.Value = false;
+        isFrictionEquationEnable.Value = currentAffordances.frictionEquation;
         isPushEquationEnable.Value = currentAffordances.pushForce.showEquation;
         isVelocityEquationEnable.Value = currentAffordances.physicalObject.showVelocityEquation;
 
@@ -192,5 +205,9 @@ public class AppManager : Singleton<AppManager>
             metaPanel.gameObject.SetActive(true);
             cameraControls.GetComponent<RectTransform>().anchoredPosition = new Vector2(25, -110);
         }
+
+        boxVelocityLabel.GetComponent<VectorLabel>().SetSpriteOrientation();
+        pushShowLabel.GetComponent<VectorLabel>().SetSpriteOrientation();
+        frictionLabel.GetComponent<VectorLabel>().SetSpriteOrientation();
     }
 }

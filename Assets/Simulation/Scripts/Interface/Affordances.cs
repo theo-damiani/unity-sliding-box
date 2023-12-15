@@ -12,6 +12,13 @@ public class Affordances : ScriptableObject
     public bool showReferenceFrame;
     public A_PhysicalObject physicalObject;
     public A_Force pushForce;
+    public bool frictionStaticIsInteractive;
+    public bool frictionKineticIsInteractive;
+    public float frictionStaticCoeff;
+    public float frictionKineticCoeff;
+    public bool frictionLabel;
+    public bool frictionVector;
+    public bool frictionEquation;
 }
 
 [Serializable]
