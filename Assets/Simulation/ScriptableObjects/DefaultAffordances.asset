@@ -21,7 +21,7 @@ MonoBehaviour:
       Y: 6.5
       Z: -8
     rotation:
-      X: 30
+      X: 35
       Y: 0
       Z: 0
     showCameraControl: 1
