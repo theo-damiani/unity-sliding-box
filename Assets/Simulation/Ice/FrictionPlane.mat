@@ -61,7 +61,7 @@ Material:
     - _NoiseScale: 3
     - _NormalStrengh: 0.15
     - _NormalStrength: 3.93
-    - _Normals: 4.2887707
+    - _Normals: 7.956588
     - _Power: 8.94
     - _QueueControl: 0
     - _QueueOffset: -1
@@ -70,8 +70,8 @@ Material:
     - _ReflexionStrengh: 1.5
     - _Refraction: 0
     - _RefractionOffset: 0
-    - _RefractionScale: 0.08900683
-    - _Smoothness: 0.47801363
+    - _RefractionScale: 0.08
+    - _Smoothness: 0.46
     - _Strenght: 2
     - _Tiling: 397
     - _depth: 0.72
@@ -87,7 +87,7 @@ Material:
     - _Shallow_Color: {r: 0.4823529, g: 0.98039216, b: 1, a: 0.1960784}
     - _Tiling: {r: 50, g: 4, b: 0, a: 0}
     - _TintColor: {r: 0.12858838, g: 1, b: 0.8291351, a: 0}
-    - _UV: {r: 0, g: 0, b: 0, a: 0}
+    - _UV: {r: -322.35907, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8518845856779618268
 MonoBehaviour:
