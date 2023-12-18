@@ -12,6 +12,8 @@ public class CustomSliderEditor : SliderEditor
     SerializedProperty snapToDecimal;
     SerializedProperty color;
     SerializedProperty dynamicMaxValue;
+    SerializedProperty handleStroke;
+    SerializedProperty handleImage;
 
 
     protected override void OnEnable()
@@ -25,6 +27,8 @@ public class CustomSliderEditor : SliderEditor
         snapToDecimal = serializedObject.FindProperty("snapToDecimal");
         color = serializedObject.FindProperty("color");
         dynamicMaxValue = serializedObject.FindProperty("dynamicMaxValue");
+        handleStroke = serializedObject.FindProperty("handleStroke");
+        handleImage = serializedObject.FindProperty("handleImage");
     }
 
     public override void OnInspectorGUI()
@@ -39,6 +43,9 @@ public class CustomSliderEditor : SliderEditor
         EditorGUILayout.Space();
         EditorGUILayout.PropertyField(color);
         EditorGUILayout.Space();
+        EditorGUILayout.PropertyField(handleStroke);
+        EditorGUILayout.PropertyField(handleImage);
+
         serializedObject.ApplyModifiedProperties();
 
         if (GUI.changed)

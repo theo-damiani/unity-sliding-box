@@ -50,8 +50,8 @@ public class AppManager : Singleton<AppManager>
     [SerializeField] private FloatVariable staticFrictionCoeff;
     [SerializeField] private FloatVariable kineticFrictionCoeff;
     [SerializeField] private Vector frictionVector;
-    [SerializeField] private Slider staticFrictionSlider;
-    [SerializeField] private Slider kineticFrictionSlider;
+    [SerializeField] private CustomSlider staticFrictionSlider;
+    [SerializeField] private CustomSlider kineticFrictionSlider;
     [SerializeField] private BoolVariable isFrictionEquationEnable;
     [SerializeField] private GameObject frictionLabel;
 
@@ -136,12 +136,14 @@ public class AppManager : Singleton<AppManager>
 
         staticFrictionCoeff.Value = currentAffordances.frictionStaticCoeff;
         staticFrictionSlider.interactable = currentAffordances.frictionStaticIsInteractive;
-        staticFrictionSlider.SetValueWithoutNotify(currentAffordances.frictionStaticCoeff);
+        staticFrictionSlider.UpdateInteracivitySliderUI();
+        staticFrictionSlider.value = currentAffordances.frictionStaticCoeff;
 
 
         kineticFrictionCoeff.Value = currentAffordances.frictionKineticCoeff;
-        staticFrictionSlider.interactable = currentAffordances.frictionKineticIsInteractive;
-        kineticFrictionSlider.SetValueWithoutNotify(currentAffordances.frictionKineticCoeff);
+        kineticFrictionSlider.interactable = currentAffordances.frictionKineticIsInteractive;
+        kineticFrictionSlider.UpdateInteracivitySliderUI();
+        kineticFrictionSlider.value = currentAffordances.frictionKineticCoeff;
 
         frictionVector.gameObject.SetActive(currentAffordances.frictionVector);
         frictionVector.components.Value = Vector3.zero;
