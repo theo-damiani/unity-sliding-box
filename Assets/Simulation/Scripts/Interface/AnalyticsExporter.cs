@@ -45,7 +45,7 @@ public abstract class AnalyticsExporter : MonoBehaviour
     private static extern void NewUnityUserTrace (string dataJSON);
     public void SendNewTrace(UserTraceHolder trace)
     {
-        Debug.Log(JsonUtility.ToJson(trace));
+        // Debug.Log(JsonUtility.ToJson(trace));
         #if UNITY_WEBGL == true && UNITY_EDITOR == false
             NewUnityUserTrace(JsonUtility.ToJson(trace));
         #endif

@@ -54,7 +54,7 @@ MonoBehaviour:
     showLabel: 1
     showEquation: 1
     initialMagnitude: 1
-  frictionStaticIsInteractive: 1
+  frictionStaticIsInteractive: 0
   frictionKineticIsInteractive: 1
   frictionStaticCoeff: 0.3
   frictionKineticCoeff: 0.2
