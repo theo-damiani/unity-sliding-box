@@ -10,14 +10,14 @@ public class KeyCodeListener : MonoBehaviour
     public UnityEvent responseOnKeyDown;
     public UnityEvent responseOnKeyUp;
 
-    void Start()
-    {
-        enabled = isActive.Value;
-    }
-
     // Update is called once per frame
     void Update()
     {
+        if (!isActive.Value)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(key))
         {
             responseOnKeyDown.Invoke();

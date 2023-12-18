@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public struct UiItems
@@ -13,12 +14,13 @@ public struct UiItems
 public class LabelPositionManager : MonoBehaviour
 {
     [SerializeField] private HorizontalDrawer drawer;
+    [SerializeField] private ToggleIcons toggle;
     [SerializeField] private List<UiItems> uiItems;
     [SerializeField] private float spacingTop;
     [SerializeField] private float startY;
     private int nbOfItemsActive;
 
-    void Start()
+    public void Init()
     {
         float showingY = 0;
         nbOfItemsActive = 0;
@@ -26,10 +28,10 @@ public class LabelPositionManager : MonoBehaviour
         {
             UiItems UIitem = uiItems[i];
             if (UIitem.IsActive.Value) {
-                //showingY -= (UIitem.Item.transform as RectTransform).rect.height;
-                Vector3 currentPos = UIitem.Item.transform.localPosition;
+                UIitem.Item.SetActive(true);
+
                 float newY = startY + spacingTop*nbOfItemsActive;
-                UIitem.Item.transform.localPosition = new Vector3(currentPos.x, currentPos.y+newY, currentPos.z);
+                UIitem.Item.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, newY, 0);
                 nbOfItemsActive++;
             }
             else
@@ -40,8 +42,7 @@ public class LabelPositionManager : MonoBehaviour
 
         if (nbOfItemsActive==0)
         {
-            showingY = -50;
-            gameObject.SetActive(false);
+            showingY = 50;
         }
         else
         {
@@ -49,5 +50,6 @@ public class LabelPositionManager : MonoBehaviour
         }
 
         drawer.SetShowingY(showingY);
+        toggle.SetWithoutRaising(true);
     }
 }

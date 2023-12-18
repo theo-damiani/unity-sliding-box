@@ -27,6 +27,9 @@ public class DataExporter : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private float timeRate;
     [SerializeField] private int maxSize;
+    [SerializeField] private int indexAxisForX = 0;
+    [SerializeField] private int indexAxisForY = 1;
+    [SerializeField] private int indexAxisForZ = 2;
     [SerializeField] private Material outlineMat;
 
     private readonly float defaultTimeRate = 0.1f;
@@ -82,9 +85,9 @@ public class DataExporter : MonoBehaviour
         {
             DataHolder data = new(
                     Time.realtimeSinceStartup - timeAtStart,
-                    _rigidbody.transform.transform.position,
-                    _rigidbody.transform.rotation.eulerAngles,
-                    _rigidbody.velocity
+                    SwitchComponentsAxis(_rigidbody.transform.transform.position),
+                    SwitchComponentsAxis(_rigidbody.transform.rotation.eulerAngles),
+                    SwitchComponentsAxis(_rigidbody.velocity)
                 );
 
             listOfJsonData.Add(JsonUtility.ToJson(data));
@@ -101,5 +104,10 @@ public class DataExporter : MonoBehaviour
         {
             outlineMat.SetFloat("_Thickness", thickness);
         }
+    }
+
+    private Vector3 SwitchComponentsAxis(Vector3 components)
+    {
+        return new Vector3(components[indexAxisForX], components[indexAxisForY], components[indexAxisForZ]);
     }
 }
