@@ -13,6 +13,9 @@ public class CustomSlider : Slider
     public bool applyColorToValue;
     public FloatVariable dynamicMaxValue;
 
+    public Image handleStroke;
+    public Image handleImage;
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -74,6 +77,8 @@ public class CustomSlider : Slider
 
         fillRect.GetComponent<Image>().color = color;
         handleRect.GetChild(0).GetComponent<Image>().color = color;
+
+        UpdateInteracivitySliderUI();
     }
 
     private void UpdateValueLabel(float value)
@@ -127,5 +132,30 @@ public class CustomSlider : Slider
         }
 
         UpdateValueLabel(value);
+    }
+
+    public void UpdateInteracivitySliderUI()
+    {
+        if (handleImage && handleStroke)
+        {
+            if (interactable)
+            {
+                Color c = color;
+                handleStroke.color = c;
+
+                Color cBg = Color.white;
+                handleImage.color = cBg;
+            }
+            else
+            {
+                Color c = color;
+                c.a = 0.51f;
+                handleStroke.color = c;
+
+                Color cBg = Color.white;
+                cBg.a = 0.39f;
+                handleImage.color = cBg;
+            }
+        }
     }
 }

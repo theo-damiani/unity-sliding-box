@@ -136,11 +136,13 @@ public class AppManager : Singleton<AppManager>
 
         staticFrictionCoeff.Value = currentAffordances.frictionStaticCoeff;
         staticFrictionSlider.interactable = currentAffordances.frictionStaticIsInteractive;
+        staticFrictionSlider.UpdateInteracivitySliderUI();
         staticFrictionSlider.value = currentAffordances.frictionStaticCoeff;
 
 
         kineticFrictionCoeff.Value = currentAffordances.frictionKineticCoeff;
         kineticFrictionSlider.interactable = currentAffordances.frictionKineticIsInteractive;
+        kineticFrictionSlider.UpdateInteracivitySliderUI();
         kineticFrictionSlider.value = currentAffordances.frictionKineticCoeff;
 
         frictionVector.gameObject.SetActive(currentAffordances.frictionVector);
