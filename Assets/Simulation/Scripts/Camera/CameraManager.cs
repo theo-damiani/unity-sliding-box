@@ -17,7 +17,7 @@ public class CameraManager : MonoBehaviour
     private Vector3 zoomDirScaled = Vector3.zero;
     private Vector3 previousTargetPos;
 
-    private bool isTopDown;
+    private bool isTopDown = false;
     private Vector3 initMinDistanceToTarget;
     private Vector3 topDownMinDistanceToTarget;
     private Quaternion previousRotation;
@@ -139,19 +139,25 @@ public class CameraManager : MonoBehaviour
     {
         isTopDown = !isTopDown;
 
-        if (isTopDown) 
+        if (isTopDown)
         {
             previousRotation = transform.localRotation;
 
             distanceToTarget.Value = Vector3.up*distanceToTarget.Value.magnitude;
             minDistanceToTarget = topDownMinDistanceToTarget;
+            zoomDirScaled = minDistanceToTarget * SliderToCamera(zoomSlider.value);
+
             transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
+            gameObject.transform.localPosition = target.localPosition + zoomDirScaled;
         }
         else
         {
             distanceToTarget.Value = initMinDistanceToTarget*distanceToTarget.Value.magnitude;
             minDistanceToTarget = initMinDistanceToTarget;
+            zoomDirScaled = minDistanceToTarget * SliderToCamera(zoomSlider.value);
+
             transform.localRotation = previousRotation;
+            gameObject.transform.localPosition = target.localPosition + zoomDirScaled;
         }
     }
 }
