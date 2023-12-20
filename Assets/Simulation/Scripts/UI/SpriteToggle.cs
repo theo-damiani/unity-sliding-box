@@ -16,13 +16,17 @@ public class SpriteToggle : MonoBehaviour
 
     public void UpdateSprite()
     {
-        if(flag.Value)
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer)
         {
-            spriteRenderer.sprite = sprite1;
-        }
-        else
-        {
-            spriteRenderer.sprite = sprite0;
+            if(flag.Value)
+            {
+                spriteRenderer.sprite = sprite1;
+            }
+            else
+            {
+                spriteRenderer.sprite = sprite0;
+            }
         }
     }
 }
